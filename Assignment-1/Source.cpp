@@ -236,12 +236,25 @@ void getData(Employee<T> employee[], int size) {
             break;
         }
         string name, id, salary, date, job_title, temp;
+        getline(file, temp, '\t');
+        file >> temp >> temp;
         getline(file, name, '\n');
+        file >> temp >> temp;
         getline(file, id, '\n');
+        file >> temp;
         getline(file, salary, '\n');
+        file >> temp >> temp >> temp;
         getline(file, date, '\n');
+        file >> temp;
         getline(file, job_title, '\n');
         getline(file, temp, '\n');
+
+        cout << endl << "Name:" << name << ";";
+        cout << endl << "ID:" << id << ";";
+        cout << endl << "Salary:" << salary << ";";
+        cout << endl << "Date:" << date << ";";
+        cout << endl << "Job Title:" << job_title << ";" << endl;
+
 
         employee[index] = Employee<string>(name, id, salary, date, job_title);
         index++;
@@ -369,17 +382,7 @@ int main()
         searchLongestTenure(employee, size);
     */
     ////////////////////////////////////////Scenario 2////////////////////////////////////////
-
     /*
-    Analysis: Students should compute and report the following salary-related statistics:
-    - The highest salary among all employees.
-    - The lowest salary among all employees.
-    - The salary range (the difference between the highest and lowest salaries).
-    - The median salary.
-    - The average salary for each designation category (e.g., Software Engineer, Data
-    Scientist, etc.).
-    - Search Employee with highest salary
-    */
 
    // Highest salary among all employees.
     cout << endl << "Highest salary among all employees: " << highestSalary(employee, size) << endl;
@@ -403,5 +406,7 @@ int main()
     cout << endl << "Employee with highest salary: " << endl;
     searchHighestSalary(employee, size);
 
+    */
+    ////////////////////////////////////////Scenario 3////////////////////////////////////////
     return 0;
 }
