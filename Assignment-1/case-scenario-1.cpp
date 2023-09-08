@@ -106,19 +106,16 @@ int serviceYears(T date) {
         day = day * 10 + (date[i] - '0');
     }
 
-    if (current_day < day) {
-        current_day += 30;
-        current_month--;
-    }
-
-    if (current_month < month) {
-        current_month += 12;
+    if (month > current_month) {
         current_year--;
     }
+    else if (month == current_month) {
+        if (day > current_day) {
+            current_year--;
+        }
+    }
 
-    year = current_year - year;
-
-    return year;
+    return current_year - year;
 }
 
 template <class T>
@@ -128,6 +125,58 @@ int averageTenure(Employee<T> employee[], int size) {
         years += serviceYears(employee[i].getDate());
     }
     return years / size;
+}
+
+template <class T>
+void distribution(Employee<T> employee[], int size) {
+    int software_engineer = 0, data_scientist = 0, product_manager = 0, qa_analyst = 0, ux_designer = 0, senior_data_analyst = 0, business_analyst = 0;
+    for (int i = 0; i < size; i++) {
+        if (employee[i].getJobTitle() == "Software Engineer" || employee[i].getJobTitle() == "Senior Software Engineer")
+        {
+            software_engineer++;
+        }
+        else if (employee[i].getJobTitle() == "Data Scientist") {
+            data_scientist++;
+        }
+        else if (employee[i].getJobTitle() == "Project Manager")
+        {
+            product_manager++;
+        }
+        else if (employee[i].getJobTitle() == "Quality Assurance Analyst")
+        {
+            qa_analyst++;
+        }
+        else if (employee[i].getJobTitle() == "UX Designer")
+        {
+            ux_designer++;
+        }
+        else if (employee[i].getJobTitle() == "Senior Data Analyst") {
+            senior_data_analyst++;
+        }
+    }
+
+    cout << "Software Engineer: " << software_engineer << endl;
+    cout << "Data Scientist: " << data_scientist << endl;
+    cout << "Product Manager: " << product_manager << endl;
+    cout << "Quality Assurance Analyst: " << qa_analyst << endl;
+    cout << "UX Designer: " << ux_designer << endl;
+    cout << "Senior Data Analyst: " << senior_data_analyst << endl;
+}
+
+template <class T>
+void searchLongestTenure(Employee<T> employee[], int size) {
+    int longest_tenure = 0;
+    for (int i = 0; i < size; i++) {
+        if (serviceYears(employee[i].getDate()) > longest_tenure) {
+            longest_tenure = serviceYears(employee[i].getDate());
+        }
+    }
+
+    for (int i = 0; i < size; i++) {
+        if (serviceYears(employee[i].getDate()) == longest_tenure) {
+            employee[i].print();
+        }
+    }
 }
 
 int main() {
@@ -159,22 +208,23 @@ int main() {
 
     file.close();
 
-    /*
-    Analysis: Compute and report the following performance metrics for all employees:
-    - Average salary in the company.
-    - Total number of employees.
-    - Average tenure (in years) of employees in the company.
-    - Distribution of employees based on their designations (e.g., Software Engineer, Data Scientist, etc.).
-    - Search Employee with longest tenure
-    */
-
     // Average salary in the company.
-    cout << "Average salary in the company: " << averageSalary(employee, index) << endl;
+    cout << endl << "Average salary in the company: " << averageSalary(employee, index);
 
     // Total number of employees.
-    cout << "Total number of employees: " << index << endl;
+    cout << endl << "Total number of employees: " << index << endl;
 
     // Average tenure (in years) of employees in the company.
+    cout << endl << "Average tenure (in years) of employees in the company: " << averageTenure(employee, index) << endl;
+
+    // Distribution of employees based on their designations (e.g., Software Engineer, Data Scientist, etc.).
+    cout << endl << "Distribution of employees based on their designations: " << endl;
+    distribution(employee, index);
+
+    // Search Employee with longest tenure
+    cout << endl << "Employee with longest tenure: " << endl;
+    searchLongestTenure(employee, index);
+
 
     return 0;
 
