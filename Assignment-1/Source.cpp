@@ -143,9 +143,9 @@ int serviceYears(T date)
 }
 
 template <class T>
-int averageTenure(Employee<T> employee[], int size)
+float averageTenure(Employee<T> employee[], int size)
 {
-    int years = 0;
+    float years = 0;
     for (int i = 0; i < size; i++)
     {
         years += serviceYears(employee[i].getDate());
@@ -215,6 +215,18 @@ void searchLongestTenure(Employee<T> employee[], int size)
 }
 
 template <class T>
+T popFirstCharactor(T str)
+{
+    T temp = "";
+    for (int i = 1; i < str.length(); i++)
+    {
+        temp += str[i];
+    }
+    return temp;
+}
+
+
+template <class T>
 void getData(Employee<T> employee[], int size) {
     ifstream file;
     int index = 0;
@@ -239,21 +251,21 @@ void getData(Employee<T> employee[], int size) {
         getline(file, temp, '\t');
         file >> temp >> temp;
         getline(file, name, '\n');
+        name = popFirstCharactor(name);
         file >> temp >> temp;
         getline(file, id, '\n');
+        id = popFirstCharactor(id);
         file >> temp;
         getline(file, salary, '\n');
+        salary = popFirstCharactor(salary);
+        salary = popFirstCharactor(salary);
         file >> temp >> temp >> temp;
         getline(file, date, '\n');
+        date = popFirstCharactor(date);
         file >> temp;
         getline(file, job_title, '\n');
+        job_title = popFirstCharactor(job_title);
         getline(file, temp, '\n');
-
-        cout << endl << "Name:" << name << ";";
-        cout << endl << "ID:" << id << ";";
-        cout << endl << "Salary:" << salary << ";";
-        cout << endl << "Date:" << date << ";";
-        cout << endl << "Job Title:" << job_title << ";" << endl;
 
 
         employee[index] = Employee<string>(name, id, salary, date, job_title);
@@ -364,27 +376,28 @@ int main()
 
     ////////////////////////////////////////Scenario 1////////////////////////////////////////
     /*
-        // Average salary in the company.
-        cout << endl << "Average salary in the company: " << averageSalary(employee, size);
+    // Average salary in the company.
+    cout << endl << "Average salary in the company: " << averageSalary(employee, size);
 
-        // Total number of employees.
-        cout << endl << "Total number of employees: " << size << endl;
+    // Total number of employees.
+    cout << endl << "Total number of employees: " << size << endl;
 
-        // Average tenure (in years) of employees in the company.
-        cout << endl << "Average tenure (in years) of employees in the company: " << averageTenure(employee, size) << endl;
+    // Average tenure (in years) of employees in the company.
+    cout << endl << "Average tenure (in years) of employees in the company: " << averageTenure(employee, size) << endl;
 
-        // Distribution of employees based on their designations (e.g., Software Engineer, Data Scientist, etc.).
-        cout << endl << "Distribution of employees based on their designations: " << endl;
-        distribution(employee, size);
+    // Distribution of employees based on their designations (e.g., Software Engineer, Data Scientist, etc.).
+    cout << endl << "Distribution of employees based on their designations: " << endl;
+    distribution(employee, size);
 
-        // Search Employee with longest tenure
-        cout << endl << "Employee with longest tenure: " << endl;
-        searchLongestTenure(employee, size);
+    // Search Employee with longest tenure
+    cout << endl << "Employee with longest tenure: " << endl;
+    searchLongestTenure(employee, size);
     */
+
     ////////////////////////////////////////Scenario 2////////////////////////////////////////
     /*
 
-   // Highest salary among all employees.
+    // Highest salary among all employees.
     cout << endl << "Highest salary among all employees: " << highestSalary(employee, size) << endl;
 
     // Lowest salary among all employees.
