@@ -44,10 +44,10 @@ int gettime() {
 
 int main() {
 
-    int arr[1000000];
+    int arr[100000];
 
-    for (int i = 0; i < 1000000; i++) {
-        arr[i] = rand() % 1000000;
+    for (int i = 0; i < 100000; i++) {
+        arr[i] = rand() % 100000;
     }
 
     int size = sizeof(arr) / sizeof(arr[0]);
