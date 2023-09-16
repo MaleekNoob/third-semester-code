@@ -60,7 +60,7 @@ public:
             }
 
             current->next = ptr;
-            size++
+            size++;
         }
     }
 
