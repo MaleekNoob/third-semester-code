@@ -2,24 +2,28 @@
 using namespace std;
 
 // template <class T>
-class Node {
+class Node
+{
 public:
     int data;
     Node *next;
 };
 
-class List {
+class List
+{
 private:
-    Node* head;
+    Node *head;
     int size;
 
 public:
-    List() {
+    List()
+    {
         head = NULL;
         size = 0;
     }
 
-    ~List() {
+    ~List()
+    {
         delete head;
         Node *current = head;
         while (current != nullptr)
@@ -30,13 +34,15 @@ public:
         }
     }
 
-    bool IsEmpty() {
+    bool IsEmpty()
+    {
         if (size = 0)
             return true;
         return false;
     }
 
-    void InsertAtFront(int x) {
+    void InsertAtFront(int x)
+    {
         Node *ptr = new Node;
         ptr->data = x;
         ptr->next = head;
@@ -44,18 +50,22 @@ public:
         size++;
     }
 
-    void InsertAtLast(int x) {
+    void InsertAtLast(int x)
+    {
         Node *ptr = new Node;
         ptr->data = x;
         ptr->next = NULL;
 
-        if (head == NULL) {
+        if (head == NULL)
+        {
             head = ptr;
             size++;
         }
-        else {
+        else
+        {
             Node *current = head;
-            while (current->next != NULL) {
+            while (current->next != NULL)
+            {
                 current = current->next;
             }
 
@@ -93,19 +103,34 @@ public:
         }
     }
 
-// This code deletes a node from the linked list at the specified position.
-// If the position is invalid, it does nothing.
-
-    void deleteNode(int position) {
-        if (position >= 0 && position < size) {
-            if (position == 0) {
+    // This code deletes a node from the linked list at the specified position.
+    // If the position is invalid, it does nothing.
+    void print()
+    {
+        Node* curr = head;
+        while(curr)
+        {
+            cout<<curr->data<<" ";
+            curr = curr->next;
+        }
+        cout<<endl;
+    }
+    void deleteNode(int position)
+    {
+        if (position >= 0 && position < size)
+        {
+            if (position == 0)
+            {
                 Node *temp = head;
                 head = head->next;
                 delete temp;
-            } else {
+            }
+            else
+            {
                 Node *current = head;
                 Node *previous = NULL;
-                for (int i = 0; i < position; i++) {
+                for (int i = 0; i < position; i++)
+                {
                     previous = current;
                     current = current->next;
                 }
@@ -113,21 +138,39 @@ public:
                 delete current;
             }
             size--;
-        } else {
+        }
+        else
+        {
             cout << "Invalid position: " << position << endl;
         }
     }
 
-    void print() {
-        Node *current = head;
-        while (current != NULL) {
-            cout << current->data << " ";
-            current = current->next;
+    void reverse()
+    {
+        Node* curr = head;
+        Node* forward = NULL;
+        Node* prev = NULL;
+        while(curr != NULL)
+        {
+            forward = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forward;
         }
+        head = prev; 
     }
-
 };
 
-int main() {
+int main()
+{
+    List ll;
+    for (int i = 0; i < 10; i++)
+    {
+        ll.InsertAtFront(i+1);
+    }
+    ll.print();
+    ll.reverse();
+    ll.print();
+
     return 0;
 }
