@@ -1,5 +1,6 @@
 // Reverse linked list using recursion
 #include <iostream>
+#include <cassert>
 using namespace std;
 
 class Node
@@ -7,6 +8,18 @@ class Node
 public:
     int data;
     Node *next;
+
+    Node()
+    {
+        data = 0;
+        next = nullptr;
+    }
+
+    Node(int d)
+    {
+        data = d;
+        next = nullptr;
+    }
 };
 
 class List
@@ -190,31 +203,53 @@ public:
     void setHead(Node* n) {
         head = n;
     }
+
+    bool testReverseList()
+    {
+        bool success = true;
+
+        // Test case 1: Reverse a list with one node
+        Node *head = new Node(1);
+        Node *reversed = reverseList(head);
+        if (reversed != head)
+        {
+            success = false;
+        }
+
+        // Test case 2: Reverse a list with multiple nodes
+        Node *node1 = new Node(1);
+        Node *node2 = new Node(2);
+        Node *node3 = new Node(3);
+        node1->next = node2;
+        node2->next = node3;
+        Node *reversed2 = reverseList(node1);
+        if (reversed2 != node3 || reversed2->next != node2 || reversed2->next->next != node1 || reversed2->next->next->next != NULL)
+        {
+            success = false;
+        }
+
+        // Test case 3: Reverse a list with only two nodes
+        Node *node4 = new Node(4);
+        Node *node5 = new Node(5);
+        node4->next = node5;
+        Node *reversed3 = reverseList(node4);
+        if (reversed3 != node5 || reversed3->next != node4 || reversed3->next->next != NULL)
+        {
+            success = false;
+        }
+
+        return success;
+    }
 };
 
 int main()
 {
-    // Creating a sample linked list
     List l;
-    l.InsertAtFront(3);
-    l.InsertAtFront(5);
-    l.InsertAtFront(7);
-
-    cout << "Original Linked List: ";
-    l.print();
-
-    // Reverse the linked list
-    l.reverseList(l.returnNode(0));
-
-    cout << "Reversed Linked List: ";
-    l.print();
-
-    // Clean up memory (not shown in your original code)
-    while (l.getHead() != nullptr)
-    {
-        Node *temp = l.getHead();
-        l.setHead(l.getHead()->next);
-        delete temp;
+    if (l.testReverseList()) {
+        cout << "Success!" << endl;
+    }
+    else {
+        cout << "Failure!" << endl;
     }
 
     return 0;
