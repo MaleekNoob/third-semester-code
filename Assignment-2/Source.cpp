@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 class Skill
@@ -83,13 +84,12 @@ public:
 
 class Task {
 private:
-    string id;
-    int es, ef, ls, lf, duration;
-    Task** next, ** prev;
     Resource resource;
-    int prevCount /*dependencies*/, nextCount /*dependents*/;
 
 public:
+    string id, dependencyId;
+    int es, ef, ls, lf, duration, taskCount;
+    Task* next;
 
     // getters and setters
     string getId()
@@ -120,16 +120,6 @@ public:
     int getDuration()
     {
         return duration;
-    }
-
-    Task** getNext()
-    {
-        return next;
-    }
-
-    Task** getPrev()
-    {
-        return prev;
     }
 
     Resource getResource()
@@ -167,16 +157,6 @@ public:
         this->duration = duration;
     }
 
-    void setNext(Task** next)
-    {
-        this->next = next;
-    }
-
-    void setPrev(Task** prev)
-    {
-        this->prev = prev;
-    }
-
     void setResource(Resource resource)
     {
         this->resource = resource;
@@ -192,7 +172,6 @@ public:
         lf = 0;
         duration = 0;
         next = nullptr;
-        prev = nullptr;
     }
 
     Task(string id, int duration)
@@ -204,27 +183,24 @@ public:
         ls = 0;
         lf = 0;
         next = nullptr;
-        prev = nullptr;
     }
 
-    Task(string id, int duration, Task** next, Task** prev)
+    Task(string id, int duration, Task* next)
     {
         this->id = id;
         this->duration = duration;
         this->next = next;
-        this->prev = prev;
         es = 0;
         ef = 0;
         ls = 0;
         lf = 0;
     }
 
-    Task(string id, int duration, Task** next, Task** prev, Resource resource)
+    Task(string id, int duration, Task* next, Resource resource)
     {
         this->id = id;
         this->duration = duration;
         this->next = next;
-        this->prev = prev;
         this->resource = resource;
         es = 0;
         ef = 0;
@@ -237,51 +213,32 @@ public:
     ~Task()
     {
         delete[] next;
-        delete[] prev;
     }
 
     // methods
 
-    void addDependency(Task* dependency) {
-        // dynamically increase ** next and add dependency to it
-        Task** temp = new Task*[nextCount + 1];
-        for (int i = 0; i < nextCount; i++) {
-            temp[i] = next[i];
-        }
-        temp[nextCount] = dependency;
-        nextCount++;
-        delete[] next;
-        next = temp;
-    }
-
-    void addDependent(Task* dependent) {
-        // dynamically increase ** prev and add dependent to it
-        Task** temp = new Task*[prevCount + 1];
-        for (int i = 0; i < prevCount; i++) {
-            temp[i] = prev[i];
-        }
-        temp[prevCount] = dependent;
-        prevCount++;
-        delete[] prev;
-        prev = temp;
+    void print() {
+        cout << id << setw(15) << duration << setw(15) << dependencyId << setw(15) << es << setw(15) << ef << setw(15) << ls << setw(15) << lf << endl;
+        // cout << "Task resource id: " << resource.getId() << endl;
+        // cout << "Task resource availability: " << resource.getAvailability() << endl;
+        // cout << "Task resource skill id: " << resource.getSkill().getId() << endl;
+        // cout << "Task resource skill proficiency: " << resource.getSkill().getProficiency() << endl;
     }
 
 };
 
-class TaskList {
+class Project {
     
 private:
+    string id;
+    int duration;
     Task* start,* end;
 
 public:
-    TaskList() {
+    Project() {
         start = new Task();
         end = new Task();
-    }
-
-    TaskList(Task* start, Task* end) {
-        this->start = start;
-        this->end = end;
+        start->next = end;
     }
 
     Task* getStart() {
@@ -300,77 +257,128 @@ public:
         this->end = end;
     }
 
-    void addDependency() {
-        /* code */
+    void addTask(Task* task) {
+        Task* temp = start;
+        while(temp->next != end) {
+            temp = temp->next;
+        }
+        temp->next = task;
+        task->next = end;
     }
-};
 
-class Project
-{
-private:
-    int id;
-    int duration;
-    Task *tasks;
-    int taskCount;
-    int resourceCount;
+    bool validateDependencyId(string dependencyId)
+    {
+        Task *temp = start;
+        while (temp->next != end)
+        {
+            if (temp->getId() == dependencyId)
+            {
+                return true;
+            }
+            temp = temp->next;
+        }
+        cout << "Invalid dependency id" << endl;
+        return false;
+    }
 
-public:
-    Project()
+    void AddTasks()
     {
-        id = 0;
-        duration = 0;
-        tasks = nullptr;
-        taskCount = 0;
-        resourceCount = 0;
+        string id;
+        char choice;
+        int duration;
+        Task *task = new Task;
+        cout << "Enter task id: ";
+        cin >> id;
+        task->id = id;
+        cout << "Enter task duration: ";
+        cin >> duration;
+        task->duration = duration;
+        if (!isEmpty()) {
+            cout << "Does this task have any dependency? (y/n): ";
+            cin >> choice;
+            if (choice == 'y')
+            {
+                string dependencyId;
+                cout << "Enter dependency id: ";
+                cin >> dependencyId;
+                if(validateDependencyId(dependencyId)) {
+                    task->dependencyId = dependencyId;
+                    addTask(task);
+                }
+                else {
+                    cout << "Dependency id not found" << endl;
+                    return;
+                }
+            }
+            else if (choice == 'n')
+            {
+                task->dependencyId = "start";
+                cout << "Enter Early Start: ";
+                cin >> task->es;
+                task->ef = task->duration + task->es;
+                addTask(task);
+            }
+            else
+            {
+                cout << "Invalid choice" << endl;
+                return;
+            }
+        }
+        else
+        {
+            task->dependencyId = "start";
+            task->es = 0;
+            task->ef = task->duration;
+            addTask(task);
+        }
     }
-    Project(int id, int duration, Task *tasks, int taskCount, int resourceCount)
+
+    void PrintTaskDependencyList()
     {
-        this->id = id;
-        this->duration = duration;
-        this->tasks = tasks;
-        this->taskCount = taskCount;
-        this->resourceCount = resourceCount;
+        Task *temp = start;
+        temp = temp->next;
+        cout << "ID" << setw(15) << "Duration" << setw(15) << "Dependency ID" << setw(15) << "ES" << setw(15) << "EF" << setw(15) << "LS" << setw(15) << "LF" << endl;
+        while (temp != end)
+        {
+            temp->print();
+            temp = temp->next;
+        }
     }
-    int getId()
+
+    void SetNthTaskDuration(string taskId, int duration)
     {
-        return id;
+        Task *temp = start;
+        while (temp->next != end)
+        {
+            if (temp->getId() == taskId)
+            {
+                temp->setDuration(duration);
+                break;
+            }
+            temp = temp->next;
+        }
     }
-    int getDuration()
+
+    void SetTaskDuration()
     {
-        return duration;
+        Task* temp = start;
+        temp = temp->next;
+        while(temp != end) {
+            cout << "Enter duration of task " << temp->getId() << ": ";
+            int duration;
+            cin >> duration;
+            temp->setDuration(duration);
+            temp = temp->next;
+        }
     }
-    Task *getTasks()
-    {
-        return tasks;
+
+    bool isEmpty() {
+        if(start->next == end) {
+            return true;
+        }
+        return false;
     }
-    int getTaskCount()
-    {
-        return taskCount;
-    }
-    int getResourceCount()
-    {
-        return resourceCount;
-    }
-    void setId(int id)
-    {
-        this->id = id;
-    }
-    void setDuration(int duration)
-    {
-        this->duration = duration;
-    }
-    void setTasks(Task *tasks)
-    {
-        this->tasks = tasks;
-    }
-    void setTaskCount(int taskCount)
-    {
-        this->taskCount = taskCount;
-    }
-    void setResourceCount(int resourceCount)
-    {
-        this->resourceCount = resourceCount;
-    }
+
 };
 
 void displayMenu() {
@@ -387,22 +395,6 @@ void displayMenu() {
 }
 
 void AddResources() {
-    /* code */
-}
-
-void AddTasks() {
-    /* code */
-}
-
-void SetTaskDuration() {
-    /* code */
-}
-
-void SetNthTaskDuration() {
-    /* code */
-}
-
-void PrintTaskDependencyList() {
     /* code */
 }
 
@@ -424,6 +416,7 @@ void CompletionTimeWithResourceProficiency() {
 
 int main() {
 
+    Project p;
     while (true) {
         displayMenu();
         int choice;
@@ -435,16 +428,24 @@ int main() {
                 AddResources();
                 break;
             case 2:
-                AddTasks();
+                p.AddTasks();
                 break;
             case 3:
-                SetTaskDuration();
+                p.SetTaskDuration();
                 break;
             case 4:
-                SetNthTaskDuration();
+            {
+                cout << "Enter task id: ";
+                string taskId;
+                cin >> taskId;
+                cout << "Enter task duration: ";
+                int duration;
+                cin >> duration;
+                p.SetNthTaskDuration(taskId, duration);
                 break;
+            }
             case 5:
-                PrintTaskDependencyList();
+                p.PrintTaskDependencyList();
                 break;
             case 6:
                 CalculateBasicSchedule();
