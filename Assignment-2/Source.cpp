@@ -90,6 +90,7 @@ public:
     string id, dependencyId;
     int es, ef, ls, lf, duration, taskCount;
     Task* next;
+    Task* dependency;
 
     // getters and setters
     string getId()
@@ -264,12 +265,14 @@ public:
         }
         temp->next = task;
         task->next = end;
+        cout << "Task added successfully" << endl;
     }
 
     bool validateDependencyId(string dependencyId)
     {
         Task *temp = start;
-        while (temp->next != end)
+        temp = temp->next;
+        while (temp != end)
         {
             if (temp->getId() == dependencyId)
             {
@@ -286,8 +289,8 @@ public:
         string id;
         char choice;
         int duration;
-        Task *task = new Task;
-        cout << "Enter task id: ";
+        Task *task = new Task();
+        cout << "\n\nEnter task id: ";
         cin >> id;
         task->id = id;
         cout << "Enter task duration: ";
@@ -303,6 +306,16 @@ public:
                 cin >> dependencyId;
                 if(validateDependencyId(dependencyId)) {
                     task->dependencyId = dependencyId;
+                    Task* temp = start;
+                    while(temp->next != end) {
+                        if(temp->getId() == dependencyId) {
+                            task->dependency = temp;
+                            break;
+                        }
+                        temp = temp->next;
+                    }
+                    task->es = task->dependency->getEf();
+                    task->ef = task->duration + task->es;
                     addTask(task);
                 }
                 else {
@@ -313,6 +326,7 @@ public:
             else if (choice == 'n')
             {
                 task->dependencyId = "start";
+                task->dependency = start;
                 cout << "Enter Early Start: ";
                 cin >> task->es;
                 task->ef = task->duration + task->es;
@@ -327,6 +341,7 @@ public:
         else
         {
             task->dependencyId = "start";
+            task->dependency = start;
             task->es = 0;
             task->ef = task->duration;
             addTask(task);
