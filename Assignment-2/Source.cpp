@@ -312,7 +312,7 @@ public:
 
     void print()
     {
-        cout << id << setw(15) << duration << setw(15) << dependencyId << setw(15) << es << setw(15) << ef << setw(15) << ls << setw(15) << lf << endl;
+        cout << id << setw(15) << duration << setw(15) << dependencyId << setw(15) << es << setw(15) << ef << setw(15) << ls << setw(15) << lf << setw(15) << slack << endl;
     }
 };
 
@@ -585,14 +585,18 @@ public:
         return false;
     }
 
-    void CalculateBasicSchedule() {
+    void ScheduleOptimization()
+    {
         LinkedList *dependencyId = new LinkedList();
         Task *temp = start;
         temp = temp->next;
-        while (temp != end) {
-            Node* current = dependencyId->head;
-            while (current != NULL) {
-                if (current->data == temp->dependencyId) {
+        while (temp != end)
+        {
+            Node *current = dependencyId->head;
+            while (current != NULL)
+            {
+                if (current->data == temp->dependencyId)
+                {
                     temp->dependency = temp->dependency->next;
                     break;
                 }
@@ -605,17 +609,21 @@ public:
         TaskLinkedList *taskLinkedList = new TaskLinkedList();
         temp = start;
         temp = temp->next;
-        while (temp != end) {
+        while (temp != end)
+        {
             bool exit = false;
-            Node* current = dependencyId->head;
-            while (current != NULL) {
-                if (current->data == temp->id) {
+            Node *current = dependencyId->head;
+            while (current != NULL)
+            {
+                if (current->data == temp->id)
+                {
                     exit = true;
                     break;
                 }
                 current = current->next;
             }
-            if (exit) {
+            if (exit)
+            {
                 temp = temp->next;
                 continue;
             }
@@ -623,7 +631,55 @@ public:
             temp = temp->next;
         }
 
-        taskLinkedList->print();
+        TaskNode *current = taskLinkedList->head;
+        int tempLf = 0;
+        while (current != NULL)
+        {
+            if (current->data->ef > tempLf)
+            {
+                tempLf = current->data->ef;
+            }
+            current = current->next;
+        }
+
+        current = taskLinkedList->head;
+        while (current != NULL)
+        {
+            current->data->lf = tempLf;
+            current->data->slack = current->data->lf - current->data->ef;
+            current->data->ls = current->data->lf - current->data->duration;
+            temp = current->data;
+            while (temp->dependency != start)
+            {
+                temp->dependency->lf = current->data->ls;
+                temp->dependency->slack = temp->dependency->lf - temp->dependency->ef;
+                temp->dependency->ls = temp->dependency->lf - temp->dependency->duration;
+                temp = temp->dependency;
+            }
+            current = current->next;
+        }
+    }
+
+    void CalculateBasicSchedule() {
+
+        ScheduleOptimization();
+        PrintTaskDependencyList();
+    }
+
+    void PrintCriticalTasks()
+    {
+        ScheduleOptimization();
+        Task *temp = start;
+        temp = temp->next;
+        cout << "Critical Tasks: ";
+        while (temp != end)
+        {
+            if (temp->slack == 0)
+            {
+                cout << temp->id << " ";
+            }
+            temp = temp->next;
+        }
     }
 };
 
@@ -732,11 +788,6 @@ void AddResources()
     /* code */
 }
 
-void PrintCriticalTasks()
-{
-    /* code */
-}
-
 void CompletionTimeWithResources()
 {
     /* code */
@@ -757,6 +808,13 @@ int main()
         int choice;
         cout << "Enter your choice: ";
         cin >> choice;
+        if (!cin)
+        {
+            cout << "Invalid choice" << endl;
+            cin.clear();
+            cin.ignore(10000, '\n');
+            continue;
+        }
 
         switch (choice)
         {
@@ -787,7 +845,7 @@ int main()
             p.CalculateBasicSchedule();
             break;
         case 7:
-            PrintCriticalTasks();
+            p.PrintCriticalTasks();
             break;
         case 8:
             CompletionTimeWithResources();
