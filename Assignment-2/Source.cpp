@@ -173,6 +173,7 @@ class Task
 public:
     string id;
     string dependencyId;
+    LinkedList *predecessorIds;
     int es;
     int ef;
     int ls;
@@ -181,6 +182,7 @@ public:
     int duration;
     Task *next;
     Task *dependency;
+    TaskLinkedList *predecessors;
 
     // getters and setters
     string getId()
@@ -264,6 +266,8 @@ public:
         lf = 0;
         duration = 0;
         next = nullptr;
+        predecessorIds = new LinkedList();
+        predecessors = new TaskLinkedList();
     }
 
     Task(string id, int duration)
@@ -276,30 +280,32 @@ public:
         ls = 0;
         lf = 0;
         next = nullptr;
+        predecessorIds = new LinkedList();
+        predecessors = new TaskLinkedList();
     }
 
-    Task(string id, int duration, Task *next)
-    {
-        this->id = id;
-        this->duration = duration;
-        this->next = next;
-        es = 0;
-        ef = 0;
-        ls = 0;
-        lf = 0;
-    }
+    // Task(string id, int duration, Task *next)
+    // {
+    //     this->id = id;
+    //     this->duration = duration;
+    //     this->next = next;
+    //     es = 0;
+    //     ef = 0;
+    //     ls = 0;
+    //     lf = 0;
+    // }
 
-    Task(string id, int duration, Task *next, Resource resource)
-    {
-        this->id = id;
-        this->duration = duration;
-        this->next = next;
-        // this->resource = resource;
-        es = 0;
-        ef = 0;
-        ls = 0;
-        lf = 0;
-    }
+    // Task(string id, int duration, Task *next, Resource resource)
+    // {
+    //     this->id = id;
+    //     this->duration = duration;
+    //     this->next = next;
+    //     // this->resource = resource;
+    //     es = 0;
+    //     ef = 0;
+    //     ls = 0;
+    //     lf = 0;
+    // }
 
     // destructor
 
@@ -483,32 +489,43 @@ public:
             cin >> choice;
             if (choice == 'y')
             {
-                string dependencyId;
-                cout << "Enter dependency id: ";
-                cin >> dependencyId;
-                if (validateDependencyId(dependencyId))
-                {
-                    task->dependencyId = dependencyId;
-                    Task *temp = start;
-                    while (temp != end)
+                int numberOfPredecessors = 0;
+                cout << "Enter number of predecessors: ";
+                cin >> numberOfPredecessors;
+                for (int i = 0; i < numberOfPredecessors; i++) {
+                    string dependencyId;
+                    cout << "Enter dependency id: ";
+                    cin >> dependencyId;
+                    if (validateDependencyId(dependencyId))
                     {
-                        if (temp->getId() == dependencyId)
+                        task->predecessorIds->add(dependencyId);
+                        Task *temp = start;
+                        while (temp != end)
                         {
-                            task->dependency = temp;
-                            break;
+                            if (temp->getId() == dependencyId)
+                            {
+                                task->predecessors->add(temp);
+                                break;
+                            }
+                            temp = temp->next;
                         }
-                        temp = temp->next;
+                        TaskNode *current = task->predecessors->head;
+                        while (current != NULL)
+                        {
+                            if (dependencyId == current->data->id) {
+                                if (current->data->ef > task->es) {
+                                    task->es = current->data->ef;
+                                }
+                            }
+                            current = current->next;
+                        }
+                        task->ef = task->duration + task->es;
+                        addTask(task);
                     }
-                    if (task->dependency->ef > task->es) {
-                        task->es = task->dependency->ef;
+                    else {
+                        cout << "Invalid dependency id" << endl;
+                        return;
                     }
-                    task->ef = task->duration + task->es;
-                    addTask(task);
-                }
-                else
-                {
-                    cout << "Dependency id not found" << endl;
-                    return;
                 }
             }
             else if (choice == 'n')
@@ -630,7 +647,7 @@ public:
             taskLinkedList->add(temp);
             temp = temp->next;
         }
-
+        
         TaskNode *current = taskLinkedList->head;
         int tempLf = 0;
         while (current != NULL)
@@ -648,15 +665,33 @@ public:
             current->data->lf = tempLf;
             current->data->slack = current->data->lf - current->data->ef;
             current->data->ls = current->data->lf - current->data->duration;
-            temp = current->data;
-            while (temp->dependency != start)
+            LinkedList *dependencyIds = new LinkedList();
+            TaskNode *temp = current->data->predecessors->head;
+            while (temp != NULL)
             {
-                temp->dependency->lf = current->data->ls;
-                temp->dependency->slack = temp->dependency->lf - temp->dependency->ef;
-                temp->dependency->ls = temp->dependency->lf - temp->dependency->duration;
-                temp = temp->dependency;
+                temp->data->lf = current->data->ls;
+                temp->data->slack = temp->data->lf - temp->data->ef;
+                temp->data->ls = temp->data->lf - temp->data->duration;
+                dependencyIds->add(temp->data->dependency->id);
+                temp = temp->next;
             }
-            current = current->next;
+            // remove duplicate id from dpendencyIds
+            Node *tempNode = dependencyIds->head;
+            while (tempNode != NULL)
+            {
+                Node *tempNode2 = tempNode->next;
+                while (tempNode2 != NULL)
+                {
+                    if (tempNode->data == tempNode2->data)
+                    {
+                        dependencyIds->remove(tempNode2->data);
+                    }
+                    tempNode2 = tempNode2->next;
+                }
+                tempNode = tempNode->next;
+            }
+
+            // if any dependencyids is "start" then move it to the end of linked list
         }
     }
 
@@ -798,8 +833,7 @@ void CompletionTimeWithResourceProficiency()
     /* code */
 }
 
-int main()
-{
+int main() {
 
     Project p;
     while (true)
@@ -862,3 +896,16 @@ int main()
 
     return 0;
 }
+
+// current->data->lf = tempLf;
+// current->data->slack = current->data->lf - current->data->ef;
+// current->data->ls = current->data->lf - current->data->duration;
+// temp = current->data;
+// while (temp->dependency != start)
+// {
+//     temp->dependency->lf = current->data->ls;
+//     temp->dependency->slack = temp->dependency->lf - temp->dependency->ef;
+//     temp->dependency->ls = temp->dependency->lf - temp->dependency->duration;
+//     temp = temp->dependency;
+// }
+// current = current->next;
