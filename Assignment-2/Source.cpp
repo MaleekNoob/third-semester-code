@@ -86,8 +86,6 @@ public:
         cout << endl;
     }
 };
-
-
 class Skill
 {
 private:
@@ -168,159 +166,7 @@ public:
     }
 };
 
-class Task
-{
-public:
-    string id;
-    string dependencyId;
-    LinkedList *predecessorIds;
-    int es;
-    int ef;
-    int ls;
-    int lf;
-    int slack;
-    int duration;
-    Task *next;
-    Task *dependency;
-    TaskLinkedList *predecessors;
-
-    // getters and setters
-    string getId()
-    {
-        return id;
-    }
-
-    int getEs()
-    {
-        return es;
-    }
-
-    int getEf()
-    {
-        return ef;
-    }
-
-    int getLs()
-    {
-        return ls;
-    }
-
-    int getLf()
-    {
-        return lf;
-    }
-
-    int getDuration()
-    {
-        return duration;
-    }
-
-    // Resource getResource()
-    // {
-    //     return resource;
-    // }
-
-    void setId(string id)
-    {
-        this->id = id;
-    }
-
-    void setEs(int es)
-    {
-        this->es = es;
-    }
-
-    void setEf(int ef)
-    {
-        this->ef = ef;
-    }
-
-    void setLs(int ls)
-    {
-        this->ls = ls;
-    }
-
-    void setLf(int lf)
-    {
-        this->lf = lf;
-    }
-
-    void setDuration(int duration)
-    {
-        this->duration = duration;
-    }
-
-    // void setResource(Resource resource)
-    // {
-    //     this->resource = resource;
-    // }
-
-    // constructors
-    Task()
-    {
-        id = "";
-        dependencyId = "";
-        es = 0;
-        ef = 0;
-        ls = 0;
-        lf = 0;
-        duration = 0;
-        next = nullptr;
-        predecessorIds = new LinkedList();
-        predecessors = new TaskLinkedList();
-    }
-
-    Task(string id, int duration)
-    {
-        this->id = id;
-        this->duration = duration;
-        dependencyId = "";
-        es = 0;
-        ef = 0;
-        ls = 0;
-        lf = 0;
-        next = nullptr;
-        predecessorIds = new LinkedList();
-        predecessors = new TaskLinkedList();
-    }
-
-    // Task(string id, int duration, Task *next)
-    // {
-    //     this->id = id;
-    //     this->duration = duration;
-    //     this->next = next;
-    //     es = 0;
-    //     ef = 0;
-    //     ls = 0;
-    //     lf = 0;
-    // }
-
-    // Task(string id, int duration, Task *next, Resource resource)
-    // {
-    //     this->id = id;
-    //     this->duration = duration;
-    //     this->next = next;
-    //     // this->resource = resource;
-    //     es = 0;
-    //     ef = 0;
-    //     ls = 0;
-    //     lf = 0;
-    // }
-
-    // destructor
-
-    ~Task()
-    {
-        delete[] next;
-    }
-
-    // methods
-
-    void print()
-    {
-        cout << id << setw(15) << duration << setw(15) << dependencyId << setw(15) << es << setw(15) << ef << setw(15) << ls << setw(15) << lf << setw(15) << slack << endl;
-    }
-};
+class Task;
 
 class TaskNode
 {
@@ -395,16 +241,147 @@ public:
         }
     }
 
+    void print();
+};
+
+class Task
+{
+public:
+    string id;
+    // string dependencyId;
+    LinkedList *predecessorIds;
+    int es;
+    int ef;
+    int ls;
+    int lf;
+    int slack;
+    int duration;
+    Task *next;
+    // Task *dependency;
+    TaskLinkedList *predecessors;
+
+    // getters and setters
+    string getId()
+    {
+        return id;
+    }
+
+    int getEs()
+    {
+        return es;
+    }
+
+    int getEf()
+    {
+        return ef;
+    }
+
+    int getLs()
+    {
+        return ls;
+    }
+
+    int getLf()
+    {
+        return lf;
+    }
+
+    int getDuration()
+    {
+        return duration;
+    }
+
+    void setId(string id)
+    {
+        this->id = id;
+    }
+
+    void setEs(int es)
+    {
+        this->es = es;
+    }
+
+    void setEf(int ef)
+    {
+        this->ef = ef;
+    }
+
+    void setLs(int ls)
+    {
+        this->ls = ls;
+    }
+
+    void setLf(int lf)
+    {
+        this->lf = lf;
+    }
+
+    void setDuration(int duration)
+    {
+        this->duration = duration;
+    }
+
+    // constructors
+    Task()
+    {
+        id = "";
+        es = 0;
+        ef = 0;
+        ls = 0;
+        lf = 0;
+        slack = 0;
+        duration = 0;
+        next = nullptr;
+        predecessorIds = new LinkedList();
+        predecessors = new TaskLinkedList();
+    }
+
+    Task(string id, int duration)
+    {
+        this->id = id;
+        this->duration = duration;
+        // dependencyId = "";
+        es = 0;
+        ef = 0;
+        ls = 0;
+        lf = 0;
+        slack = 0;
+        next = nullptr;
+        predecessorIds = new LinkedList();
+        predecessors = new TaskLinkedList();
+    }
+
+    // destructor
+
+    ~Task()
+    {
+        delete[] next;
+    }
+
+    // methods
+
     void print()
     {
-        TaskNode *curr = head;
-        while (curr != NULL)
-        {
-            cout << curr->data->id << " (" << curr->data->duration << " days)" << endl;
-            curr = curr->next;
+        cout << id << setw(15) << duration;
+        Node* current = predecessorIds->head;
+        string predecessor = "";
+        while (current != NULL) {
+            predecessor += current->data + " ";
+            current = current->next;
         }
+        cout << setw(15) << predecessor << setw(15) << es << setw(15) << ef << setw(15) << ls << setw(15) << lf << setw(15) << slack << endl;
     }
 };
+
+void TaskLinkedList::print()
+{
+    TaskNode *curr = head;
+    while (curr != NULL)
+    {
+        cout << curr->data->id << endl;
+        curr = curr->next;
+    }
+}
 
 class Project
 {
@@ -493,45 +470,56 @@ public:
                 cout << "Enter number of predecessors: ";
                 cin >> numberOfPredecessors;
                 for (int i = 0; i < numberOfPredecessors; i++) {
-                    string dependencyId;
-                    cout << "Enter dependency id: ";
-                    cin >> dependencyId;
-                    if (validateDependencyId(dependencyId))
-                    {
-                        task->predecessorIds->add(dependencyId);
-                        Task *temp = start;
-                        while (temp != end)
-                        {
-                            if (temp->getId() == dependencyId)
+                    int predecessorCount;
+                    LinkedList *tempPredecessorIds = new LinkedList();
+                    char choice;
+                    do {
+                        string tem;
+                        cout << "Enter predecessor id: ";
+                        cin >> tem;
+                        if (validateDependencyId(tem)) {
+                            task->predecessorIds->add(tem);
+                            Task *temp = start;
+                            while (temp != end)
                             {
-                                task->predecessors->add(temp);
-                                break;
-                            }
-                            temp = temp->next;
-                        }
-                        TaskNode *current = task->predecessors->head;
-                        while (current != NULL)
-                        {
-                            if (dependencyId == current->data->id) {
-                                if (current->data->ef > task->es) {
-                                    task->es = current->data->ef;
+                                if (temp->getId() == tem)
+                                {
+                                    task->predecessors->add(temp);
+                                    break;
                                 }
+                                temp = temp->next;
                             }
-                            current = current->next;
+                            TaskNode *current = task->predecessors->head;
+                            while (current != NULL)
+                            {
+                                if (tem == current->data->id)
+                                {
+                                    if (current->data->ef > task->es)
+                                    {
+                                        task->es = current->data->ef;
+                                    }
+                                }
+                                current = current->next;
+                            }
+                            task->ef = task->duration + task->es;
+                            addTask(task);
                         }
-                        task->ef = task->duration + task->es;
-                        addTask(task);
-                    }
-                    else {
-                        cout << "Invalid dependency id" << endl;
-                        return;
-                    }
+                        else
+                        {
+                            cout << "Invalid dependency id" << endl;
+                            return;
+                        }
+                        tempPredecessorIds->add(tem);
+                        predecessorCount++;
+                        cout << "Do you want to add more predecessors? (y/n): ";
+                        cin >> choice;
+                    } while (choice == 'y');
                 }
             }
             else if (choice == 'n')
             {
-                task->dependencyId = "start";
-                task->dependency = start;
+                task->predecessorIds->add("start");
+                task->predecessors->add(start);
                 cout << "Enter Early Start: ";
                 cin >> task->es;
                 task->ef = task->duration + task->es;
@@ -545,8 +533,8 @@ public:
         }
         else
         {
-            task->dependencyId = "start";
-            task->dependency = start;
+            task->predecessorIds->add("start");
+            task->predecessors->add(start);
             task->es = 0;
             task->ef = task->duration;
             addTask(task);
@@ -557,7 +545,7 @@ public:
     {
         Task *temp = start;
         temp = temp->next;
-        cout << "ID" << setw(15) << "Duration" << setw(15) << "Dependency ID" << setw(15) << "ES" << setw(15) << "EF" << setw(15) << "LS" << setw(15) << "LF" << endl;
+        cout << "ID" << setw(15) << "Duration" << setw(15) << "Dependency ID" << setw(15) << "ES" << setw(15) << "EF" << setw(15) << "LS" << setw(15) << "LF" << setw(15) << "Slack" << endl;
         while (temp != end)
         {
             temp->print();
@@ -604,25 +592,25 @@ public:
 
     void ScheduleOptimization()
     {
+
+        // Collect predecessor id of all tasks
         LinkedList *dependencyId = new LinkedList();
         Task *temp = start;
         temp = temp->next;
         while (temp != end)
         {
-            Node *current = dependencyId->head;
+            Node *current = temp->predecessorIds->head;
             while (current != NULL)
             {
-                if (current->data == temp->dependencyId)
-                {
-                    temp->dependency = temp->dependency->next;
-                    break;
-                }
+                dependencyId->add(current->data);
                 current = current->next;
             }
-            dependencyId->add(temp->dependencyId);
             temp = temp->next;
         }
+        cout << "Collected predecessor ids" << endl;
+        dependencyId->print();  // start start A
 
+        // Collect end tasks
         TaskLinkedList *taskLinkedList = new TaskLinkedList();
         temp = start;
         temp = temp->next;
@@ -647,7 +635,11 @@ public:
             taskLinkedList->add(temp);
             temp = temp->next;
         }
-        
+        cout << "Collected end tasks" << endl;
+        taskLinkedList->print();
+        // B C
+
+        // Calculate highest EF for LF calculation
         TaskNode *current = taskLinkedList->head;
         int tempLf = 0;
         while (current != NULL)
@@ -656,43 +648,141 @@ public:
             {
                 tempLf = current->data->ef;
             }
+            end->es = tempLf;
+            end->ef = tempLf;
+            end->ls = tempLf;
+            end->lf = tempLf;
+            end->predecessorIds->add(current->data->id);
+            end->predecessors->add(current->data);
             current = current->next;
         }
+        cout << "Calculated highest EF" << endl;
+        cout << "Temp Lf: " << tempLf;
 
-        current = taskLinkedList->head;
-        while (current != NULL)
-        {
-            current->data->lf = tempLf;
-            current->data->slack = current->data->lf - current->data->ef;
-            current->data->ls = current->data->lf - current->data->duration;
-            LinkedList *dependencyIds = new LinkedList();
-            TaskNode *temp = current->data->predecessors->head;
-            while (temp != NULL)
+       int count = 0;
+       TaskNode *iter;
+       while (true) {
+            count++;
+            cout << "\nWhile loop iteration " << count << endl;
+            bool exit = false;
+            // Sort taskLinkedList such that if any taskNode has id equal to start then it should be at the end
+            iter = taskLinkedList->head;
+            TaskNode *prev = NULL;
+            while (iter != NULL)
             {
-                temp->data->lf = current->data->ls;
-                temp->data->slack = temp->data->lf - temp->data->ef;
-                temp->data->ls = temp->data->lf - temp->data->duration;
-                dependencyIds->add(temp->data->dependency->id);
-                temp = temp->next;
-            }
-            // remove duplicate id from dpendencyIds
-            Node *tempNode = dependencyIds->head;
-            while (tempNode != NULL)
-            {
-                Node *tempNode2 = tempNode->next;
-                while (tempNode2 != NULL)
+                if (iter->data->id == "start")
                 {
-                    if (tempNode->data == tempNode2->data)
+                    if (prev == NULL && iter->next == NULL)
                     {
-                        dependencyIds->remove(tempNode2->data);
+                        break;
                     }
-                    tempNode2 = tempNode2->next;
+                    else if (iter == taskLinkedList->head && iter->next != NULL) {
+                        taskLinkedList->head = iter->next;
+                        iter->next = NULL;
+                        taskLinkedList->tail->next = iter;
+                        taskLinkedList->tail = iter;
+                    }
+                    else if (iter == taskLinkedList->tail) {
+                        break;
+                    }
+                    else {
+                        prev->next = iter->next;
+                        iter->next = NULL;
+                        taskLinkedList->tail->next = iter;
+                        taskLinkedList->tail = iter;
+                    }
                 }
-                tempNode = tempNode->next;
+                prev = iter;
+                iter = iter->next;
             }
+            cout << "TaskLinkedList sorted" << endl;
+            taskLinkedList->print();
 
-            // if any dependencyids is "start" then move it to the end of linked list
-        }
+            // remove duplicate id
+            // iter = taskLinkedList->head;
+            // while (iter != NULL)
+            // {
+            //     TaskNode *iter2 = iter->next;
+            //     while (iter2 != NULL)
+            //     {
+            //         if (iter->data->id == iter2->data->id)
+            //         {
+            //             taskLinkedList->remove(iter2->data);
+            //         }
+            //         iter2 = iter2->next;
+            //     }
+            //     iter = iter->next;
+            // }
+            // cout << "Duplicate id removed" << endl;
+            // taskLinkedList->print();
+
+            // Solve each task in taskLinkedList only if its id isn't equal to "start"
+            iter = taskLinkedList->head;
+            while (iter != NULL) {
+                exit = false;
+                if (iter->data->id != "start") {
+                    TaskLinkedList *previousTasks = new TaskLinkedList();
+                    Task* traverse = start;
+                    traverse = traverse->next;
+                    while (traverse != NULL) {
+                        Node* temp = traverse->predecessorIds->head;
+                        while (temp != NULL) {
+                            if (temp->data == iter->data->id) {
+                                previousTasks->add(traverse);
+                                break;
+                            }
+                            temp = temp->next;
+                        }
+                        traverse = traverse->next;
+                    }
+                    cout << endl << "Previous tasks of " << iter->data->id << ": " << endl;
+                    previousTasks->print();
+                    TaskNode *temp = previousTasks->head;
+                    int tempLf = 10000;
+                    while (temp != NULL)
+                    {
+                        if (temp->data->lf < tempLf)
+                            tempLf = temp->data->ls;
+                        temp = temp->next;
+                    }
+                    iter->data->lf = tempLf;
+                    iter->data->ls = iter->data->lf - iter->data->duration;
+                    iter->data->slack = iter->data->lf - iter->data->ef;
+                    iter = iter->next;
+                }
+                else {
+                    exit = true;
+                    break;
+                }
+            }
+            if (exit) {
+                cout << "WE WON!!!!" << endl;
+                break;
+            }
+            cout << "Solved each task in taskLinkedList" << endl;
+            PrintTaskDependencyList();
+
+            // Get predecessors of each task in taskLinkedList
+            TaskLinkedList *tempTaskLinkedList = new TaskLinkedList();
+            TaskNode* tem = taskLinkedList->head;
+            while (tem != NULL) {
+                TaskNode* temp = tem->data->predecessors->head;
+                while (temp != NULL) {
+                    if (temp->data->id == "") {
+                        temp->data->id = "start";
+                    }
+                    cout << "Predecessor of " << tem->data->id << " is " << temp->data->id << endl;
+                    tempTaskLinkedList->add(temp->data);
+                    temp = temp->next;
+                }
+                tem = tem->next;
+            }
+            taskLinkedList = tempTaskLinkedList;
+            cout << "Got predecessors of each task in taskLinkedList" << endl;
+            taskLinkedList->print();
+       }
+
+       
     }
 
     void CalculateBasicSchedule() {
@@ -717,92 +807,6 @@ public:
         }
     }
 };
-
-/*
-class TaskNode
-{
-public:
-    Task *data;
-    TaskNode *next;
-
-    TaskNode(Task *data)
-    {
-        this->data = data;
-        this->next = NULL;
-    }
-};
-
-class TaskLinkedList
-{
-public:
-    TaskNode *head;
-    TaskNode *tail;
-
-    TaskLinkedList()
-    {
-        this->head = NULL;
-        this->tail = NULL;
-    }
-
-    bool isEmpty()
-    {
-        return head == NULL;
-    }
-
-    void add(Task *data)
-    {
-        TaskNode *taskNode = new TaskNode(data);
-        if (isEmpty())
-        {
-            head = taskNode;
-            tail = taskNode;
-        }
-        else
-        {
-            tail->next = taskNode;
-            tail = taskNode;
-        }
-    }
-
-    void remove(Task *data)
-    {
-        if (isEmpty())
-        {
-            return;
-        }
-        if (head->data == data)
-        {
-            TaskNode *temp = head;
-            head = head->next;
-            delete temp;
-            return;
-        }
-        TaskNode *prev = head;
-        TaskNode *curr = head->next;
-        while (curr != NULL)
-        {
-            if (curr->data == data)
-            {
-                prev->next = curr->next;
-                delete curr;
-                return;
-            }
-            prev = curr;
-            curr = curr->next;
-        }
-    }
-
-    void print()
-    {
-        TaskNode *curr = head;
-        while (curr != NULL)
-        {
-            cout << curr->data->id << " (" << curr->data->duration << " days)" << endl;
-            curr = curr->next;
-        }
-    }
-};
-*/
 
 void displayMenu()
 {
@@ -896,16 +900,3 @@ int main() {
 
     return 0;
 }
-
-// current->data->lf = tempLf;
-// current->data->slack = current->data->lf - current->data->ef;
-// current->data->ls = current->data->lf - current->data->duration;
-// temp = current->data;
-// while (temp->dependency != start)
-// {
-//     temp->dependency->lf = current->data->ls;
-//     temp->dependency->slack = temp->dependency->lf - temp->dependency->ef;
-//     temp->dependency->ls = temp->dependency->lf - temp->dependency->duration;
-//     temp = temp->dependency;
-// }
-// current = current->next;
