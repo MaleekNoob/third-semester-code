@@ -18,8 +18,13 @@ In the realm of Project Management, scheduling is a fundamental task that involv
 
 ### Functions to Implement
 - `addResources()`: Add resources to the project, along with their skill and proficiency.
- The addResources() function associates resources with tasks in the project. It prompts the user to input resource details, including an identifier, availability, skill, and skill proficiency. Resources are then linked to the appropriate tasks, ensuring efficient project execution. This function is vital for optimizing resource allocation within the project.
+The addResources() function associates resources with tasks in the project. It prompts the user to input resource details, including an identifier, availability, skill, and skill proficiency. Resources are then linked to the appropriate tasks, ensuring efficient project execution. This function is vital for optimizing resource allocation within the project.
+
+
 - `addTasks()`: Add tasks to the project, and provide relevant information.
+The addTasks() function allows the user to input task details, including an identifier and duration. Users can specify task dependencies, if any, to build a logical sequence of tasks. The function then calculates Early Start (ES) and Early Finish (EF) times, ensuring proper scheduling within the project.
+
+  
 - `setTaskDuration()`: Modify the duration of all tasks in the project.
 - `set_nth_TaskDuration()`: Change the duration of a specific task.
 - `printTaskDependencyList()`: Display the dependencies of all tasks.
