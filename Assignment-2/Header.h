@@ -1345,7 +1345,7 @@ public:
         while (traverse != end)
         {
             float ans = traverse->duration / traverse->resource->getSkill().getProficiency();
-            traverse->duration = ans;
+            traverse->duration = ceil(ans);
             traverse = traverse->next;
         }
         CompletionTimeWithResources();
