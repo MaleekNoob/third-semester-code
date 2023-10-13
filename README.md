@@ -18,18 +18,7 @@ In the realm of Project Management, scheduling is a fundamental task that involv
 
 ### Functions to Implement
 - `addResources()`: Add resources to the project, along with their skill and proficiency.
-  Function Workflow
-The function iterates through the list of tasks in the project, starting from the first task and moving through the list.
-For each task, it prompts the user to enter specific details for the associated resource, including:
-Resource Identifier: A unique identifier for the resource.
-Resource Availability: The availability of the resource, which indicates when the resource can be assigned to tasks.
-Resource Skill Identifier: The skill required for the task, matching the skill set of the resource.
-Resource Skill Proficiency: The proficiency level of the resource in the required skill.
-The function creates a Skill object with the resource's skill identifier and proficiency level.
-It then creates a Resource object with the resource identifier, availability, and the skill created in the previous step.
-The resource is associated with the task using the setResource() method.
-The isResourceAdded flag for the task is set to true to indicate that a resource has been successfully added to the task.
-The function moves on to the next task in the list and repeats the resource assignment process.
+ The addResources() function associates resources with tasks in the project. It prompts the user to input resource details, including an identifier, availability, skill, and skill proficiency. Resources are then linked to the appropriate tasks, ensuring efficient project execution. This function is vital for optimizing resource allocation within the project.
 - `addTasks()`: Add tasks to the project, and provide relevant information.
 - `setTaskDuration()`: Modify the duration of all tasks in the project.
 - `set_nth_TaskDuration()`: Change the duration of a specific task.
