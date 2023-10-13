@@ -1,3 +1,9 @@
+/*
+Name: Maleek Hussain Ali
+Section: SE (B)
+Roll Number: 22i-1526
+*/
+
 #include <iostream>
 #include <iomanip>
 using namespace std;
