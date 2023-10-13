@@ -2,6 +2,8 @@
 Name: Maleek Hussain Ali
 Section: SE (B)
 Roll Number: 22i-1526
+Course: Data Structures
+Assignment 2
 */
 
 #include "Header.h"

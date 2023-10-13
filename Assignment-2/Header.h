@@ -2,10 +2,13 @@
 Name: Maleek Hussain Ali
 Section: SE (B)
 Roll Number: 22i-1526
+Course: Data Structures
+Assignment 2
 */
 
 #include <iostream>
 #include <iomanip>
+#include <math.h>
 using namespace std;
 
 class Node
@@ -480,6 +483,13 @@ public:
         return false;
     }
 
+    void validationInt(int &num) {
+        while (num < 0) {
+            cout << "Enter a valid number (The number should be positive): ";
+            cin >> num;
+        }
+    }
+
     void AddResources()
     {
         Task *temp = start;
@@ -494,6 +504,7 @@ public:
             cin >> resourceId;
             cout << "Enter resource availability for task " << temp->getId() << ": ";
             cin >> resourceAvailability;
+            validationInt(resourceAvailability);
             cout << "Enter resource skill id for task " << temp->getId() << ": ";
             cin >> resourceSkillId;
             do
@@ -522,6 +533,7 @@ public:
         task->id = id;
         cout << "Enter task duration: ";
         cin >> duration;
+        validationInt(duration);
         task->duration = duration;
 
         // Check if there are existing tasks in the project
@@ -538,6 +550,7 @@ public:
                 // Prompt the user for the number of task predecessors
                 cout << "Enter number of predecessors: ";
                 cin >> numberOfPredecessors;
+                validationInt(numberOfPredecessors);
 
                 for (int i = 0; i < numberOfPredecessors; i++)
                 {
@@ -669,6 +682,7 @@ public:
             cout << "Enter duration of task " << temp->getId() << ": ";
             int duration;
             cin >> duration;
+            validationInt(duration);
             temp->setDuration(duration);
             temp = temp->next;
         }
@@ -1330,7 +1344,8 @@ public:
         traverse = traverse->next;
         while (traverse != end)
         {
-            traverse->duration = traverse->duration / traverse->resource->getSkill().getProficiency();
+            float ans = traverse->duration / traverse->resource->getSkill().getProficiency();
+            traverse->duration = ans;
             traverse = traverse->next;
         }
         CompletionTimeWithResources();
