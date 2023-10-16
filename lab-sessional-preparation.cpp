@@ -122,16 +122,51 @@ void reverse_stack(Stack<T1>& stack) {
     }
 }
 
+bool checkBrackets(string paraenthesis) {
+    Stack<char> stack;
+    for (int i = 0; i < paraenthesis.length(); i++) {
+        char op = paraenthesis[i];
+
+        if (op == '(' || op =='[' || op == '{') {
+            stack.push(op);
+        }
+        else if (op == ')') {
+            if (stack.pop() == '(')
+                continue;
+            else
+                return false;
+        }
+        else if (op == ']') {
+            if (stack.pop() == '[')
+                continue;
+            else 
+                return false;
+        }
+        else if (op == '}') {
+            if (stack.pop() == '{')
+                continue;
+            else    
+                return false;
+        }
+        else 
+            continue;
+    }
+    if (stack.isEmpty())
+        return true;
+    else 
+        return false;
+}
+
 int main() {
 
-    Stack<int> s;
-    s.push(10);
-    s.push(20);
-    s.push(30);
-    s.push(40);
-    generic_print(s);
-    reverse_stack(s);
-    cout << "Stack reversed!";
-    generic_print(s);
+    string paraenthesis;
+    cout << "\nEnter string of paraenthesis: ";
+    cin >> paraenthesis;
+    if (checkBrackets(paraenthesis)) {
+        cout << endl << "Balanced";
+    }
+    else {
+        cout << endl << "Unbalanced";
+    }
     return 0;
 }
