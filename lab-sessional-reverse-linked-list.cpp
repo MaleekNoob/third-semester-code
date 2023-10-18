@@ -99,28 +99,29 @@ class List {
     }
 };
 
+Node *reverseList(Node *head)
+{
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+    Node *reversedList = reverseList(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return reversedList;
+}
+
 int main() {
 
     List list;
     list.insertAtEnd(1);
     list.insertAtEnd(2);
-    // list.insertAtEnd(3);
-    // list.insertAtEnd(4);
-    // list.insertAtEnd(5);
-
-    // create a cycle
-    Node* curr = list.head;
-    while (curr->next != NULL) {
-        curr = curr->next;
-    }
-    curr->next = list.head;
-
-    cout << "Has cycle: " << list.hasCycle() << endl;
-
-    // remove cycle
-    curr->next = NULL;
-
-    cout << "Has cycle: " << list.hasCycle() << endl;
+    list.insertAtEnd(3);
+    list.insertAtEnd(4);
+    list.insertAtEnd(5);
+    list.print();
+    reverseList(list.head);
+    list.print();
 
     return 0;
 }
