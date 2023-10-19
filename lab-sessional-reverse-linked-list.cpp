@@ -126,7 +126,7 @@ class List {
             temp->next = newNode1;
         }
     }
-    
+
     Node *insertionSortList(Node *head)
     {
         Node *traverse = head;
@@ -146,19 +146,23 @@ class List {
 
         return head;
     }
-};
 
-Node *reverseList(Node *head)
-{
-    if (head == NULL || head->next == NULL)
+    Node *reverseList(Node *head)
     {
-        return head;
+        if (head == NULL || head->next == NULL)
+        {
+            return head;
+        }
+        Node *reversedList = reverseList(head->next);
+        head->next->next = head;
+        head->next = NULL;
+        return reversedList;
     }
-    Node *reversedList = reverseList(head->next);
-    head->next->next = head;
-    head->next = NULL;
-    return reversedList;
-}
+
+    bool isPalindrome(Node* head) {
+        /* code */
+    }
+};
 
 int main() {
 
