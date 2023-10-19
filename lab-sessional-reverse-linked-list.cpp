@@ -159,8 +159,27 @@ class List {
         return reversedList;
     }
 
-    bool isPalindrome(Node* head) {
-        /* code */
+    bool isPalindrome(Node *head)
+    {
+        Node *traverse = head;
+        Node *reversed = NULL;
+        while (traverse != NULL)
+        {
+            Node *temp = new Node(traverse->data);
+            temp->next = reversed;
+            reversed = temp;
+            traverse = traverse->next;
+        }
+
+        traverse = head;
+        while (reversed != NULL && traverse != NULL)
+        {
+            if (traverse->data != reversed->data)
+                return false;
+            traverse = traverse->next;
+            reversed = reversed->next;
+        }
+        return true;
     }
 };
 
@@ -171,15 +190,13 @@ int main() {
     list.insertAtEnd(5);
     list.insertAtEnd(3);
     list.insertAtEnd(4);
-    list.insertAtEnd(0);
+    list.insertAtEnd(-1);
     list.print();
-    Node* kamal = list.insertionSortList(list.head);
-    
-    Node* traverse = kamal;
-    cout << endl << "Sorted List: ";
-    while (traverse != NULL) {
-        cout << traverse->data << " ";
-        traverse = traverse->next;
+    if (list.isPalindrome(list.head)) {
+        cout << "\nPalindrome";
+    }
+    else {
+        cout << "\nNot Palindrome";
     }
 
     return 0;
