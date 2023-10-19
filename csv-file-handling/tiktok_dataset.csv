@@ -1,0 +1,300 @@
+#,claim_status,video_id,video_duration_sec,video_transcription_text,verified_status,author_ban_status,video_view_count,video_like_count,video_share_count,video_download_count,video_comment_count
+1,claim,7017666017,59,someone shared with me that drone deliveries are already happening and will become common by 2025,not verified,under review,343296,19425,241,1,0
+2,claim,4014381136,32,someone shared with me that there are more microorganisms in one teaspoon of soil than people on the planet,not verified,active,140877,77355,19034,1161,684
+3,claim,9859838091,31,"someone shared with me that american industrialist andrew carnegie had a net worth of $475 million usd, worth over $300 billion usd today",not verified,active,902185,97690,2858,833,329
+4,claim,1866847991,25,"someone shared with me that the metro of st. petersburg, with an average depth of hundred meters, is the deepest metro in the world",not verified,active,437506,239954,34812,1234,584
+5,claim,7105231098,19,someone shared with me that the number of businesses allowing employees to bring pets to the workplace has grown by 6% worldwide,not verified,active,56167,34987,4110,547,152
+6,claim,8972200955,35,someone shared with me that gross domestic product (gdp) is the best financial indicator of a country's overall trade potential,not verified,under review,336647,175546,62303,4293,1857
+7,claim,4958886992,16,someone shared with me that elvis presley has sold more records than the music band the beatles,not verified,active,750345,486192,193911,8616,5446
+8,claim,2270982263,41,"someone shared with me that the best selling single of all time is ""white christmas"" by bing crosby",not verified,active,547532,1072,50,22,11
+9,claim,5235769692,50,someone shared with me that about half of the world's population can access the web via a mobile device,not verified,active,24819,10160,1050,53,27
+10,claim,4660861094,45,someone shared with me that it would take a 50 petabyte drive to store every written work ever created,verified,active,931587,171051,67739,4104,2540
+11,claim,8095102436,47,someone shared with me that an average user spends 40% of their day on the internet,not verified,active,695641,238030,23062,1719,378
+12,claim,4507218541,30,someone shared with me that the world generates 2.5 quintillion bytes of data every day,not verified,active,482046,168107,19474,3282,532
+13,claim,3609761483,51,someone shared with me that the longest recorded cricket match lasted 14 days,not verified,active,700081,434565,97995,2408,1411
+14,claim,3850678773,20,"someone shared with me that 1920 was the last time the event ""tug-of-war"" was played in the summer olympics",not verified,under review,929685,497236,154917,1225,805
+15,claim,1656032315,42,someone shared with me that american basketball legend wilt chamberlain never fouled out of a game,not verified,active,937231,237318,81496,1867,960
+16,claim,9277685719,10,"someone shared with me that the city with the largest bus network in the world is jakarta, indonesia",not verified,active,746186,193,29,2,0
+17,claim,9346511024,11,someone shared with me that a dog’s sense of smell is much more powerful than a human's,not verified,active,923007,67714,17710,845,536
+18,claim,9533847147,27,"someone shared with me that a common garden snail has over 12,000 teeth",not verified,active,467702,40435,2804,495,327
+19,claim,2359906270,11,someone shared with me that we only see the same side of the moon,not verified,active,168594,105245,37929,1723,694
+20,claim,7146819625,34,someone shared with me that the moon was once part of the earth,not verified,active,249935,20437,2240,212,70
+21,claim,3827012052,27,someone shared with me that neptune radiates more heat than it gets from the sun,not verified,active,550259,30528,6704,258,88
+22,claim,6940114042,20,someone shared with me that there are more stars in the universe than grains of sand on earth,not verified,active,510989,162612,26745,2507,1283
+23,claim,7986031283,52,"someone shared with me that about once a year, an asteroid the size of a car enters earth’s atmosphere",not verified,banned,60096,34245,11345,219,77
+24,claim,5733649579,54,"someone shared with me that through the seasons, a reindeer’s eyes will change color",not verified,active,750942,136252,27119,2637,1206
+25,claim,2736327047,39,someone shared with me that elephants will console each other during stressful situations,not verified,active,353722,39844,10399,181,54
+26,claim,6792082620,33,someone shared with me that avocados never ripen while they are still attached to the tree,not verified,active,506061,288150,39351,2405,1134
+27,claim,2385469584,10,someone shared with me that people are born with only 2 natural fears: the fear of falling and the fear of loud sounds,not verified,under review,50892,7976,2903,125,78
+28,claim,6569363811,22,someone shared with me that sneezing while traveling at 60 mph makes you close your eyes for 50 feet,not verified,under review,812056,329068,3515,5200,1108
+29,claim,6301836558,21,someone shared with me that people don’t sneeze in their sleep,not verified,active,677855,332569,97961,5531,2386
+30,claim,6854087993,48,"someone shared with me that at birth, baby pandas are smaller than mice",not verified,active,74323,20940,3678,274,63
+31,claim,7568304116,55,someone shared with me that the microwave oven was an accidental invention,not verified,active,573518,324003,125931,4737,2918
+32,claim,7730527836,21,someone shared with me that a blue whale's heartbeat can be heard from two miles away,not verified,banned,376637,226700,69329,2060,278
+33,claim,8304906458,23,someone shared with me that the longest location name on the planet earth is 85 letters in english.,not verified,active,781955,407367,65029,4274,2240
+34,claim,7723647550,33,someone shared with me that the red-billed quelea is the most common bird on earth,not verified,active,822795,390001,125607,4012,2055
+35,claim,1260034177,10,"someone shared with me that in japan, its considered good luck when a sumo wrestler makes your baby cry",not verified,active,418750,133645,27821,2387,206
+36,claim,5407291277,12,someone shared with me that bubble wrap was originally designed to be used as wallpaper,not verified,active,535825,73157,1642,1573,97
+37,claim,6844920875,29,someone shared with me that humans have jumped further than horses in the olympics,not verified,active,924262,465230,37874,8124,635
+38,claim,9171709060,30,someone shared with me that a one-armed player scored the winning goal in the first soccer tournament world cup in 1930,not verified,active,489267,110476,17911,2585,90
+39,claim,2310167046,20,someone shared with me that jobs in the field of agriculture are the most prevalent types of jobs in the world,not verified,active,879368,572608,153090,5639,2542
+40,claim,4040057402,20,someone shared with me that the eye of an ostrich is bigger than its brain,not verified,active,135682,50881,7713,944,324
+41,claim,7334026327,25,someone shared with me that the largest pair of eyes in the world belongs to the giant squid,not verified,under review,289935,3484,1092,20,3
+42,claim,5280794672,34,someone shared with me that buttermilk does not contain any butter,not verified,active,903941,409234,32446,8390,1390
+43,claim,2869029922,46,someone shared with me that one strand of hair can hold up to 3 ounces of weight,not verified,active,704320,161850,19294,3077,566
+44,claim,1421558858,5,someone shared with me that bottled water has an expiration date,not verified,under review,609453,262718,80347,826,99
+45,claim,4477338445,31,someone shared with me that driving south from detroit will lead to canada,not verified,active,790372,24067,4167,434,236
+46,claim,4479658983,34,someone shared with me that sea otters are born unable to swim,not verified,under review,750369,271101,65378,1482,426
+47,claim,9398305380,17,someone shared with me that apple seeds contain cyanide,not verified,under review,630556,67394,16130,1197,720
+48,claim,2584492620,52,someone shared with me that alaska is the only u.s. state whose name can be typed on a single row on the american standard keyboard,not verified,active,853104,45589,16274,758,163
+49,claim,6528249616,18,someone shared with me that up to 20% of power outages in the u.s. are due to squirrels chewing through the lines,not verified,active,636117,360722,12659,105,65
+50,claim,6798355648,36,someone shared with me that the largest living thing on earth is a tree,not verified,active,658349,231224,89272,5131,1426
+51,claim,9161593537,17,someone shared with me that ketchup leaves the bottle at a measured speed of 25 miles per year,not verified,active,472376,210080,37155,4600,2697
+52,claim,1291361813,53,someone shared with me that the town of calama in chile has never experienced rain,not verified,active,984793,453657,15329,521,30
+53,claim,6346301856,40,a friend shared with a friend that yellowstone national park is home to a supervolcano,not verified,active,301749,27047,1544,230,18
+54,claim,8355089614,54,a friend shared with a friend that the largest rock on earth is in australia,not verified,active,971357,111164,13178,2338,779
+55,claim,1767010474,29,a friend shared with a friend that the average british driver will spend around 99 days of their life stuck in traffic,not verified,active,302525,23738,673,314,118
+56,claim,6315458270,39,a friend shared with a friend that windshield wipers were invented in 1905,not verified,active,578064,269616,66922,6075,3321
+57,claim,5775227146,25,a friend shared with a friend that the origins of the banjo instrument begin in africa,not verified,active,205584,49255,5072,1186,223
+58,claim,7667994370,12,a friend shared with a friend that an average user spends 40% of their day on the internet,not verified,active,422117,112780,26052,1038,380
+59,claim,3024206043,49,a friend shared with a friend that half of retail purchases are now made through a mobile device,not verified,active,265598,59672,4952,815,400
+60,claim,2931436974,13,a friend shared with a friend that the most watched summer olympics event for the past 20 years has been gymnastics,not verified,active,307222,13123,4689,130,63
+61,claim,8774049123,34,a friend shared with a friend that badminton is the fastest ball and net sport in the world,not verified,active,962886,174445,10848,619,162
+62,claim,1712882974,32,"a friend shared with a friend that starting in 1990, american basketball player michael jordan and the chicago bulls never had a three-game losing streak for eight years",not verified,banned,29060,1219,171,3,1
+63,claim,8610989068,56,a friend shared with a friend that a dog’s sense of smell is much more powerful than a human's,not verified,active,952372,10191,114,223,55
+64,claim,8244180015,37,"a friend shared with a friend that a common garden snail has over 12,000 teeth",not verified,active,986657,537842,199478,4721,2891
+65,claim,7043718296,44,a friend shared with a friend that koalas sleep up to 22 hours per day,not verified,active,561388,152488,26474,2668,291
+66,claim,2833181639,30,a friend shared with a friend that some sharks can glow in the dark,not verified,under review,773587,279571,16917,3617,1331
+67,claim,8560734678,26,a friend shared with a friend that it would take 258 earth days to drive around one of saturn’s rings at a speed of 75 mph,not verified,under review,71676,45324,6977,503,258
+68,claim,6496578100,55,a friend shared with a friend that sputnik was the first artificial satellite in space,not verified,banned,663764,113266,31512,2325,564
+69,claim,3916624482,31,a friend shared with a friend that neptune radiates more heat than it gets from the sun,not verified,under review,170467,86546,19813,721,447
+70,claim,5342027952,5,a friend shared with a friend that a day on mars is about the same length as on earth,not verified,under review,988418,344391,78618,239,22
+71,claim,7417954522,27,a friend shared with a friend that there’s a planet made of diamonds two times the size of earth,not verified,active,345192,63925,7783,99,57
+72,claim,9903088754,43,a friend shared with a friend that there is a world championship for throwing mobile phones,not verified,active,755590,128952,25210,1750,498
+73,claim,5423860831,48,a friend shared with a friend that avocados never ripen while they are still attached to the tree,not verified,under review,611144,46826,12186,503,44
+74,claim,3679640007,34,a friend shared with a friend that people are born with only 2 natural fears: the fear of falling and the fear of loud sounds,not verified,active,929654,616498,97225,588,176
+75,claim,5979401954,7,a friend shared with a friend that humans can’t taste food without saliva,not verified,active,208229,115949,2253,2058,149
+76,claim,2473723793,17,a friend shared with a friend that the eiffel tower leans away from the sun,not verified,banned,248398,139777,17309,1639,209
+77,claim,2342638585,31,a friend shared with a friend that only one-fourth of the sahara desert is sandy,verified,active,677288,214708,66446,2167,1428
+78,claim,7486721746,8,a friend shared with a friend that the french scrabble world champion winner doesn’t speak french,not verified,under review,726718,241278,28762,1233,87
+79,claim,3780164260,13,a friend shared with a friend that a one-armed player scored the winning goal in the first soccer tournament world cup in 1930,not verified,under review,857998,468810,183219,5830,2431
+80,claim,8352128964,48,a friend shared with a friend that it is physically impossible for humans to keep their eyes open while sneezing,not verified,active,589041,144226,51973,3362,1597
+81,claim,1925338598,31,a friend shared with a friend that pineapples are named after pinecones,not verified,active,604898,288298,95777,3225,899
+82,claim,3791068995,20,a friend shared with a friend that losing weight alters brain activity,not verified,under review,737901,205717,4645,666,12
+83,claim,6404484639,56,a friend shared with a friend that your fingernails on your dominant hand grow faster,not verified,under review,680252,177711,1946,3223,9
+84,claim,1403965706,31,a friend shared with a friend that playing dance music helps ward off mosquitoes,not verified,under review,250243,45005,9872,705,240
+85,claim,2675430150,28,a friend shared with a friend that mice typically only live for 6 months in the wild,not verified,active,5279,2670,16,12,7
+86,claim,8975962413,37,a friend shared with a friend that the dwarf planet pluto was named by an 11-year-old girl,not verified,active,364943,212815,6149,906,4
+87,claim,4966288323,51,a friend shared with a friend that the insect population of the world is 1 billion times more than the world population,not verified,banned,865320,139937,49470,2574,1504
+88,claim,4219642346,51,a friend shared with a friend that the human brain uses 20% of the body's oxygen,not verified,active,874793,306997,29763,5262,2006
+89,claim,9716988521,24,a friend shared with a friend that you can fit about 400 grapevines in one acre of land,not verified,active,468077,194366,37758,4319,131
+90,claim,5774531836,57,a friend shared with a friend that a pineapple plant can only produce one pineapple a year,not verified,active,539826,132637,16501,444,60
+91,claim,6837955665,55,a friend shared with a friend that strawberries are the only known fruit to grow their seeds externally,not verified,active,309589,170284,54865,2735,754
+92,claim,5424962156,39,a friend mentioned someone discovered that nucelear fission is now being used to produce electricity,not verified,active,572084,93187,4911,1475,9
+93,claim,8176623100,26,"a friend mentioned someone discovered that american industrialist andrew carnegie had a net worth of $475 million usd, worth over $300 billion usd today",not verified,active,879769,107260,27447,2288,1257
+94,claim,5559711920,37,a friend mentioned someone discovered that the rubik's cube is the best-selling product of all time,not verified,banned,436875,260329,41775,4663,1947
+95,claim,7401659041,43,a friend mentioned someone discovered that mobile phone use in india is nearly 100%,not verified,active,501354,248235,64155,3883,2110
+96,claim,6570169707,50,a friend mentioned someone discovered that the total number of multinational companies investing in green initiatives has increased by 35% since 2020,not verified,banned,168449,90690,16615,1962,383
+97,claim,1386456170,32,a friend mentioned someone discovered that the oldest playable musical instruments were found in china,not verified,banned,200060,106959,32426,2564,1500
+98,claim,4415434682,16,a friend mentioned someone discovered that the japanese word ‘karaoke’ comes from a phrase meaning ’empty orchestra’,not verified,under review,423164,186423,55246,2404,1430
+99,claim,3490110525,57,a friend mentioned someone discovered that about half of the world's population can access the web via a mobile device,not verified,under review,182650,88712,28801,434,95
+100,claim,8089681692,49,a friend mentioned someone discovered that an average user spends 40% of their day on the internet,not verified,active,195432,27339,3483,433,200
+101,claim,8266347544,9,a friend mentioned someone discovered that the average user checks their mobile phone around 150 times each day,not verified,active,90931,51974,3568,970,156
+102,claim,9794898551,43,a friend mentioned someone discovered that 4 of the top 10 highest paid atheletes in the world are players in the american national basketball assocation (nba),not verified,banned,920337,567807,214550,4524,2850
+103,claim,6445697344,33,a friend mentioned someone discovered that the first gloves used in american sport baseball were fingerless,not verified,active,995247,505255,156842,9099,3081
+104,claim,3817438444,23,a friend mentioned someone discovered that the concorde was the fastest passenger jet ever,not verified,banned,956314,572469,154525,2902,298
+105,claim,9952827704,53,a friend mentioned someone discovered that the busiest airport in the world is in the united states,not verified,active,328659,165642,46318,337,135
+106,claim,7687467484,49,"a friend mentioned someone discovered that london, england has the world's oldest subway system",verified,under review,631075,284311,97442,1163,354
+107,claim,7222903379,60,a friend mentioned someone discovered that dragonflies can see in all directions at the same time,not verified,under review,228358,19295,2332,270,35
+108,claim,5923572459,51,a friend mentioned someone discovered that koalas sleep up to 22 hours per day,not verified,active,276059,97689,38967,2376,507
+109,claim,2944539454,53,a friend mentioned someone discovered that the volcano olympus mons on mars is over 3 times taller than mount everest,not verified,banned,351066,58438,19119,39,0
+110,claim,6645515132,41,a friend mentioned someone discovered that saturn is less dense than water,not verified,under review,530697,30862,8161,278,166
+111,claim,3984935056,49,a friend mentioned someone discovered that sound actually travels in space,not verified,active,2883,1242,348,11,2
+112,claim,3573642153,56,a friend mentioned someone discovered that a single day on venus takes 243 earth days,not verified,active,426268,155933,50782,3414,1935
+113,claim,2507142098,11,a friend mentioned someone discovered that evidence from seymour island suggest that penguins were once 6 ft tall,not verified,under review,660561,322446,120347,5519,3449
+114,claim,4025589908,40,a friend mentioned someone discovered that the scottish were the first people to fry chicken,not verified,active,150706,72838,9413,454,1
+115,claim,7041087617,47,a friend mentioned someone discovered that sneezing while traveling at 60 mph makes you close your eyes for 50 feet,not verified,active,965051,567073,67201,3940,2550
+116,claim,7373606171,24,a friend mentioned someone discovered that j is the only letter that doesn’t appear on the periodic table of elements,not verified,under review,311719,71173,6362,496,163
+117,claim,1256736154,50,a friend mentioned someone discovered that the tallest tower of cupcakes ever made was over 35 feet,not verified,active,56142,27239,1540,390,172
+118,claim,2115386652,48,a friend mentioned someone discovered that bees can fly higher than mount everest,verified,active,915553,272536,78299,7,3
+119,claim,9082277974,20,a friend mentioned someone discovered that cold water is just as cleansing as hot water,not verified,active,593281,332025,103892,7769,2486
+120,claim,9850813380,59,a friend mentioned someone discovered that more people speak english as their second language than those who use it as their primary language,not verified,banned,169697,12958,589,314,120
+121,claim,6559389686,53,a friend mentioned someone discovered that triskaidekaphobia is the fear of the number 13,not verified,active,812513,523168,20023,7565,2809
+122,claim,5597300051,34,a friend mentioned someone discovered that your fingernails on your dominant hand grow faster,not verified,active,743385,414665,52389,1427,107
+123,claim,5066246380,58,a friend mentioned someone discovered that apple seeds contain cyanide,not verified,active,726835,293637,31598,3868,1854
+124,claim,9463149535,43,a friend mentioned someone discovered that frigate birds can sleep while flying,not verified,active,950500,146636,25913,1956,956
+125,claim,6028042493,38,a friend reported someone discovered that humans will live on mars by 2035,not verified,banned,25771,4775,1771,77,26
+126,claim,2102557699,35,a friend reported someone discovered that we will all fly with individual jetpacks by 2032,not verified,banned,660194,349323,30579,7102,1335
+127,claim,2818218055,50,a friend reported someone discovered that earth days are getting longer over time due to orbital expansion,not verified,active,848448,207258,56105,3272,275
+128,claim,9826381124,18,a friend reported someone discovered that seventy percent of small businesses are owned and operated by a single person.,not verified,banned,56312,36854,6211,512,254
+129,claim,7164433838,10,a friend reported someone discovered that more businesses will be owned by women than men by 2045,not verified,under review,263806,8528,2373,27,10
+130,claim,1474103260,19,a friend reported someone discovered that gross domestic product (gdp) is the best financial indicator of a country's overall trade potential,not verified,active,951464,365819,101090,752,387
+131,claim,3188060641,40,a friend reported someone discovered that 1 billion cars are currently in use around the world,not verified,active,907591,291689,65458,1736,853
+132,claim,2312282712,40,a friend reported someone discovered that it would take less than a month to get to the moon by car at 60mph,not verified,active,285004,33069,11653,572,71
+133,claim,8045719558,40,a friend reported someone discovered that the car radio was first introduced in 1922,not verified,active,611518,43431,8890,196,45
+134,claim,6287699512,18,a friend reported someone discovered that the harmonica is the best selling musical instrument,not verified,banned,227262,34194,565,456,74
+135,claim,7194264172,59,a friend reported someone discovered that 90% of the world’s data was generated after 2019,not verified,active,216296,92543,22041,270,70
+136,claim,9514639653,34,a friend reported someone discovered that over 60% of the world's population has access to the internet,not verified,active,714428,445887,67205,5983,2559
+137,claim,2868422477,22,a friend reported someone discovered that singapore has the fastest internet connectivity in the world.,not verified,active,915340,459193,53596,7729,1440
+138,claim,7413726543,29,a friend reported someone discovered that half of retail purchases are now made through a mobile device,not verified,active,830574,424374,150314,7366,2892
+139,claim,7852597291,48,a friend reported someone discovered that the world generates 2.5 quintillion bytes of data every day,not verified,active,42647,17703,5027,375,155
+140,claim,2516528160,60,a friend reported someone discovered that 1 in 3 people have never used the internet,not verified,active,697308,190336,65540,3019,1572
+141,claim,6296788623,16,"a friend reported someone discovered that shanghai, china has the world's longest subway system",verified,active,775229,42657,1636,835,247
+142,claim,7640548534,26,a friend reported someone discovered that a dog’s sense of smell is much more powerful than a human's,not verified,active,242727,4464,620,62,26
+143,claim,5715784279,12,a friend reported someone discovered that dragonflies can see in all directions at the same time,not verified,active,64994,37401,4768,246,100
+144,claim,2099433738,15,a friend reported someone discovered that koalas sleep up to 22 hours per day,not verified,active,338032,174028,58508,3167,834
+145,claim,5893807380,26,a friend reported someone discovered that it snows metal and rains acid on venus,not verified,active,405315,241311,12754,5667,1200
+146,claim,6710546869,28,a friend reported someone discovered that the sun takes over one earth month to make a full rotation,not verified,active,443793,62808,18380,671,251
+147,claim,7688135507,23,a friend reported someone discovered that it takes an average of 364 licks to get to the center of a lollipop,not verified,active,754822,441008,28597,7603,4094
+148,claim,4617688188,20,a friend reported someone discovered that there is a world championship for throwing mobile phones,not verified,active,612397,69987,27953,910,606
+149,claim,2934930612,50,a friend reported someone discovered that take out restaurants have been found in the remains of pompeii,not verified,active,998792,151348,48830,2843,1301
+150,claim,7850604311,51,a friend reported someone discovered that captive ravens can speak better than parrots,not verified,banned,765069,301210,66991,278,156
+151,claim,8919589653,54,a friend reported someone discovered that the scottish were the first people to fry chicken,not verified,active,112830,38543,526,107,3
+152,claim,9072252537,23,a friend reported someone discovered that elephants will console each other during stressful situations,not verified,active,762699,352035,26264,7098,458
+153,claim,2073671797,24,a friend reported someone discovered that avocados never ripen while they are still attached to the tree,not verified,active,645348,25962,6713,211,44
+154,claim,8269228783,16,a friend reported someone discovered that the brain is the fattiest organ in the body,not verified,active,379005,204577,49432,2862,1858
+155,claim,3576462449,15,a friend reported someone discovered that humans can’t taste food without saliva,not verified,active,894337,129925,3678,1010,304
+156,claim,5054812105,58,a friend reported someone discovered that the netherlands is home to the population of tallest humans on earth,not verified,active,712536,216805,47945,4486,1734
+157,claim,2731216926,9,a friend reported someone discovered that new zealanders have more pets per household than any other country,not verified,under review,148492,70227,14962,1264,841
+158,claim,8587085648,33,a friend reported someone discovered that q' is the only letter that doesn’t appear in any u.s. state name,not verified,active,433310,102440,34276,1753,1030
+159,claim,8080736770,50,"a friend reported someone discovered that blue whales eat 500,000 calories in 1 mouthful on average",not verified,active,649471,317456,42349,1072,46
+160,claim,3424864755,5,a friend reported someone discovered that humans have jumped further than horses in the olympics,not verified,under review,40208,8018,1029,16,0
+161,claim,2188053512,38,a friend reported someone discovered that the first commercial airplane flight lasted 23 minutes,not verified,active,346555,70156,12343,605,94
+162,claim,3210888500,20,a friend reported someone discovered that 170-year-old champagne was found under the baltic sea,not verified,active,812447,343371,79962,3608,528
+163,claim,6425710834,6,a friend reported someone discovered that x-rays can’t distinguish real diamonds from fake ones,not verified,under review,391812,30875,1706,165,76
+164,claim,9742572710,28,a friend reported someone discovered that the continental tectonic plates move at the same rate that fingernails grow,not verified,banned,468758,78841,12464,1271,681
+165,claim,5127402473,35,a friend reported someone discovered that driving south from detroit will lead to canada,not verified,active,642888,21908,7009,412,122
+166,claim,2042520713,35,a friend reported someone discovered that more people speak english as their second language than those who use it as their primary language,not verified,banned,633270,6077,1018,101,60
+167,claim,9561409967,17,a friend reported someone discovered that triskaidekaphobia is the fear of the number 13,not verified,banned,734203,296340,112802,6795,2745
+168,claim,8435751140,44,a friend reported someone discovered that the opposite sides of dice will always equal 7,not verified,active,939399,144236,31119,906,104
+169,claim,2990741745,8,a friend reported someone discovered that bananas get their curved shape by growing towards the sun,not verified,active,494881,32805,8934,534,198
+170,claim,6722335625,27,a friend reported someone discovered that frigate birds can sleep while flying,verified,active,886215,521651,114330,10943,4219
+171,claim,7746498271,47,a friend reported someone discovered that the chicken is the closest relative to the t-rex,verified,banned,648343,233325,66078,4728,2122
+172,claim,8739148209,12,a friend reported someone discovered that violin bows are made from horsehair,not verified,banned,56430,34026,4691,0,0
+173,claim,5498164986,42,a friend reported someone discovered that the largest living thing on earth is a tree,not verified,active,558866,187629,15527,4493,2012
+174,claim,3936574703,36,a friend reported someone discovered that the moon is moving away from the earth,not verified,active,91199,28946,3171,115,59
+175,claim,2604259933,25,a friend reported someone discovered that a pineapple plant can only produce one pineapple a year,not verified,active,788517,307605,9543,4832,2067
+176,claim,1608107038,45,a friend reported someone discovered that china is the world’s largest silk producer,not verified,active,115622,56824,13342,817,373
+177,claim,2727382715,36,a friend reported someone discovered that redwoods are the tallest trees,not verified,active,36741,4541,49,38,23
+178,claim,5902155661,23,a friend told me someone discovered that humans will live on mars by 2035,not verified,active,417233,217824,34725,357,66
+179,claim,9213366701,16,a friend told me someone discovered that drone deliveries are already happening and will become common by 2025,not verified,active,509376,153342,34764,2281,1318
+180,claim,8842246310,52,a friend told me someone discovered that earth days are getting longer over time due to orbital expansion,verified,active,993601,360808,123543,2648,1377
+181,claim,6889169972,29,a friend told me someone discovered that 20% of the world's oxygen is produced in the amazon jungles,not verified,active,511307,271981,20832,6673,2467
+182,claim,7804864557,32,a friend told me someone discovered that there are about 582 million entrepreneurs in the world,not verified,under review,518655,105148,40590,1367,502
+183,claim,4823187644,59,a friend told me someone discovered that the highest total mileage clocked by a single car is 2850000 million miles,not verified,banned,268145,112600,14468,2719,106
+184,claim,9335708424,45,a friend told me someone discovered that violins are constructed from 70 individual wooden pieces,not verified,under review,862840,435872,93125,1459,746
+185,claim,7766705565,24,a friend told me someone discovered that the musical artist prince played 27 different instruments on his debut album,not verified,active,244746,15130,2944,180,62
+186,claim,4696899899,37,a friend told me someone discovered that it would take a 50 petabyte drive to store every written work ever created,not verified,active,210960,115814,36974,1855,467
+187,claim,6745378976,12,a friend told me someone discovered that kite flying is a professional sport in thailand.,not verified,under review,111863,516,33,11,4
+188,claim,6772896896,11,"a friend told me someone discovered that starting in 1990, american basketball player michael jordan and the chicago bulls never had a three-game losing streak for eight years",not verified,active,89566,45283,5417,137,21
+189,claim,1862037900,42,a friend told me someone discovered that the busiest airport in the world is in the united states,not verified,under review,444516,215982,12545,4987,756
+190,claim,4551827249,49,a friend told me someone discovered that koalas sleep up to 22 hours per day,not verified,banned,226281,97360,28001,110,72
+191,claim,7514931640,29,a friend told me someone discovered that footprints left on the moon won’t disappear as there is no wind,not verified,active,330402,171557,45777,1871,355
+192,claim,8706266170,17,a friend told me someone discovered that neptune radiates more heat than it gets from the sun,not verified,banned,704208,133661,17715,368,51
+193,claim,4219776341,24,a friend told me someone discovered that neptune’s winds are the fastest in the solar system,not verified,active,519070,158598,54151,665,188
+194,claim,8594722433,50,a friend told me someone discovered that there are currently 6 spacecrafts on mars,not verified,banned,499826,309975,17914,7456,1333
+195,claim,2139725155,50,a friend told me someone discovered that mars has running water,not verified,active,167944,87441,6040,353,137
+196,claim,6933800311,60,a friend told me someone discovered that the bent joint in the legs of the flamingo is its ankles,not verified,active,511854,312695,39685,376,133
+197,claim,8984696114,60,a friend told me someone discovered that canned pumpkins do not contain actual pumpkins,not verified,banned,684341,127101,7517,1741,1005
+198,claim,3067704895,22,a friend told me someone discovered that dogs can understand up to 250 hand gestures and words,not verified,under review,825852,479045,3712,9804,3127
+199,claim,4488897516,52,a friend told me someone discovered that captive ravens can speak better than parrots,not verified,under review,683434,94655,37748,309,87
+200,claim,8870414389,41,a friend told me someone discovered that the scottish were the first people to fry chicken,verified,under review,231712,12348,771,79,36
+201,claim,2095021181,50,a friend told me someone discovered that baked beans are not actually baked,not verified,active,597742,178975,44473,1885,314
+202,claim,4305540024,36,a friend told me someone discovered that the brain is the fattiest organ in the body,not verified,under review,273182,81099,21955,1075,611
+203,claim,3532933441,46,a friend told me someone discovered that no two tongue prints are alike,not verified,under review,482106,228292,64845,1252,465
+204,claim,5846298972,52,a friend told me someone discovered that sneezing while traveling at 60 mph makes you close your eyes for 50 feet,not verified,active,93598,52844,86,175,9
+205,claim,5264861021,39,a friend told me someone discovered that people don’t sneeze in their sleep,not verified,active,870656,137823,46313,2897,1696
+206,claim,7431921988,5,a friend told me someone discovered that australia has a bright pink lake,not verified,active,441748,122633,13387,556,130
+207,claim,9810190926,40,a friend told me someone discovered that j is the only letter that doesn’t appear on the periodic table of elements,not verified,active,33738,614,3,6,3
+208,claim,2892129815,42,"a friend told me someone discovered that at birth, baby pandas are smaller than mice",not verified,active,934185,22021,8068,538,134
+209,claim,7530589499,25,a friend told me someone discovered that penguins can jump as high as 9 feet in the air,not verified,active,422912,248328,50384,4380,19
+210,claim,9379001882,21,a friend told me someone discovered that the microwave oven was an accidental invention,not verified,banned,515255,7604,2738,22,10
+211,claim,4451936493,17,a friend told me someone discovered that the longest location name on the planet earth is 85 letters in english.,not verified,active,749576,314896,61154,5917,1414
+212,claim,7808317786,54,a friend told me someone discovered that only one-fourth of the sahara desert is sandy,not verified,active,169966,87626,31020,536,58
+213,claim,9991058069,58,a friend told me someone discovered that there are billions of eggs produced commercially each year,not verified,active,629607,221678,18098,1467,389
+214,claim,4836248944,23,a friend told me someone discovered that pineapples are named after pinecones,not verified,banned,49714,19166,2673,341,7
+215,claim,7103907292,42,a friend told me someone discovered that leeches were historically used to predict the weather,not verified,under review,807048,185813,48347,4570,962
+216,claim,9113665173,40,a friend told me someone discovered that melting glaciers make fizzy noises,not verified,active,961772,469073,97414,8430,2801
+217,claim,8738219904,43,a friend told me someone discovered that the most successful predator is a wild dog,not verified,under review,148883,85580,34011,131,29
+218,claim,5939958492,12,a friend told me someone discovered that the world’s largest pyramid cannot be found in egypt,not verified,active,631388,337717,101692,2704,1298
+219,claim,3532054883,48,a friend told me someone discovered that triskaidekaphobia is the fear of the number 13,not verified,active,939426,346894,107200,281,95
+220,claim,7025489308,37,a friend told me someone discovered that the largest living thing on earth is a tree,not verified,active,560115,259081,97881,3155,935
+221,claim,7883860722,27,a friend told me someone discovered that ketchup leaves the bottle at a measured speed of 25 miles per year,not verified,under review,100810,46464,5054,326,47
+222,claim,3021635631,49,a friend told me someone discovered that a giant tortoise that was believed to be extinct was found in the galapagos islands,not verified,active,859572,128379,2142,2633,1100
+223,claim,3161322846,6,a friend told me someone discovered that a pineapple plant can only produce one pineapple a year,not verified,active,86449,20873,2412,395,154
+224,claim,2518698336,19,a friend claimed someone discovered that it snows in the sahara desert,not verified,active,22675,15038,4688,212,0
+225,claim,2126104163,8,a friend claimed someone discovered that it would take less than a month to get to the moon by car at 60mph,not verified,active,30448,988,206,25,16
+226,claim,4418650441,23,a friend claimed someone discovered that the first electric vehicle was created in 1832,not verified,banned,569559,184470,14061,1468,173
+227,claim,6454272818,47,a friend claimed someone discovered that the car radio was first introduced in 1922,not verified,banned,813598,48172,948,942,401
+228,claim,5140520149,6,a friend claimed someone discovered that the automotive industry employs about 9.9 million americans,not verified,active,506876,212303,15689,1428,760
+229,claim,6466205346,46,a friend claimed someone discovered that violins are constructed from 70 individual wooden pieces,not verified,active,682406,108826,1338,2661,1014
+230,claim,9201613150,27,a friend claimed someone discovered that the musical artist prince played 27 different instruments on his debut album,not verified,banned,878248,400541,121970,3447,361
+231,claim,1397273081,45,"a friend claimed someone discovered that 99% of individuals in denmark, ireland and the united arab emirates have internet access",not verified,under review,909325,314007,48135,6184,1278
+232,claim,3336652561,18,"a friend claimed someone discovered that 1920 was the last time the event ""tug-of-war"" was played in the summer olympics",not verified,active,881753,295676,7539,1611,417
+233,claim,8370716280,53,a friend claimed someone discovered that kite flying is a professional sport in thailand.,not verified,banned,179828,100089,9428,1529,518
+234,claim,3245423844,5,a friend claimed someone discovered that the longest commercial flight in history took around 30 hours,not verified,active,414954,43839,2052,753,32
+235,claim,6438126463,42,a friend claimed someone discovered that the busiest airport in the world is in the united states,not verified,under review,380857,160730,35354,1844,457
+236,claim,3795737742,23,a friend claimed someone discovered that dolphins are mammals,not verified,active,661093,180093,32820,3721,1338
+237,claim,7592496774,20,a friend claimed someone discovered that some ants can lift up to 20 times their own body weight,not verified,active,612645,340472,6082,7560,1963
+238,claim,2414295768,31,a friend claimed someone discovered that the hummingbird is the only bird that can fly backwards,not verified,active,38266,7567,3012,136,14
+239,claim,2158621735,10,a friend claimed someone discovered that sound actually travels in space,not verified,active,392496,251922,30959,3538,299
+240,claim,5038558037,8,a friend claimed someone discovered that neptune’s winds are the fastest in the solar system,not verified,active,175290,86677,1785,1819,391
+241,claim,4102631472,38,a friend claimed someone discovered that pluto could theoretically sustain life,not verified,active,430258,20195,3453,349,146
+242,claim,7115588605,14,a friend claimed someone discovered that mars has running water,verified,active,474105,312860,104143,5030,553
+243,claim,3175914995,53,a friend claimed someone discovered that there is a world championship for throwing mobile phones,not verified,active,337386,55788,4060,1305,120
+244,claim,1709426027,6,a friend claimed someone discovered that take out restaurants have been found in the remains of pompeii,not verified,active,448341,280452,60986,1746,105
+245,claim,8354003399,31,a friend claimed someone discovered that chihuahuas have the largest brain among dogs,not verified,under review,236413,78298,17635,621,389
+246,claim,6028968151,35,a friend claimed someone discovered that china owns all of the pandas in the world,not verified,active,549591,127657,17860,1984,781
+247,claim,7593600318,46,a friend claimed someone discovered that people are born with only 2 natural fears: the fear of falling and the fear of loud sounds,not verified,active,315640,182597,37612,3309,1246
+248,claim,4584695987,20,a friend claimed someone discovered that humans can’t taste food without saliva,not verified,banned,467018,268058,22841,2263,1064
+249,claim,3852846298,57,a friend claimed someone discovered that millions of trees are estimated to be planted by squirrels that forgot their buried nuts,not verified,active,794004,68594,1742,1166,324
+250,claim,5658428187,16,a friend claimed someone discovered that a blue whale's heartbeat can be heard from two miles away,not verified,active,119841,13171,2251,41,10
+251,claim,8334676075,47,a friend claimed someone discovered that the longest location name on the planet earth is 85 letters in english.,not verified,active,796512,186540,38277,3839,2131
+252,claim,1641627688,25,a friend claimed someone discovered that new zealanders have more pets per household than any other country,not verified,active,390461,25079,7608,193,59
+253,claim,8522480418,44,a friend claimed someone discovered that our sense of smell and taste decreases by 20%-50% during airplane flights,not verified,active,86880,18003,966,352,232
+254,claim,9941882873,11,a friend claimed someone discovered that the largest pair of eyes in the world belongs to the giant squid,not verified,under review,371447,99183,8684,470,63
+255,claim,2217725507,15,a friend claimed someone discovered that a candle’s flame is blue in zero gravity,not verified,under review,128877,29885,4119,264,74
+256,claim,5531181559,24,a friend claimed someone discovered that there are fewer stars in the sky than there are trees on earth,not verified,under review,795212,123662,43300,345,48
+257,claim,3171537153,9,a friend claimed someone discovered that no two teeth from different people will ever be alike,not verified,active,255361,71078,1427,1368,448
+258,claim,9375231660,33,a friend claimed someone discovered that triskaidekaphobia is the fear of the number 13,not verified,active,911083,402307,128902,4807,2863
+259,claim,5474600099,48,a friend claimed someone discovered that apple seeds contain cyanide,not verified,active,855783,355794,111958,8563,1991
+260,claim,8520150329,20,a friend claimed someone discovered that a man once set a record by putting on over 260 t-shirts,not verified,banned,223109,105943,21379,1689,162
+261,claim,3885322171,26,a friend claimed someone discovered that up to 20% of power outages in the u.s. are due to squirrels chewing through the lines,not verified,active,137178,28660,11396,266,158
+262,claim,2582314275,15,a friend claimed someone discovered that violin bows are made from horsehair,not verified,active,927524,145741,22076,607,328
+263,claim,5219406021,38,a friend claimed someone discovered that mice typically only live for 6 months in the wild,not verified,active,532090,5265,100,114,22
+264,claim,7040915193,20,a friend claimed someone discovered that flossing your teeth improves memory,not verified,active,133433,67969,26793,647,221
+265,claim,4417620444,17,a friend claimed someone discovered that the moon is moving away from the earth,not verified,under review,879928,378123,19315,5379,3383
+266,claim,5235914247,41,a friend claimed someone discovered that ketchup leaves the bottle at a measured speed of 25 miles per year,not verified,active,770231,382002,34029,6944,3988
+267,claim,9732547058,34,a friend claimed someone discovered that strawberries are the only known fruit to grow their seeds externally,not verified,active,800390,413882,28689,8926,1975
+268,claim,2188868783,49,"a friend mentioned someone revealed that an average human child's developing body has over 300 bones, but by adulthood they'll have 206",not verified,active,883273,169172,39076,311,66
+269,claim,8374922300,45,a friend mentioned someone revealed that making emotional facial expressions can prompt humans to have those emotions,not verified,active,834772,304099,91292,1010,145
+270,claim,6893123009,29,a friend mentioned someone revealed that new islands are being formed by volcanoes in the sea everyday,not verified,active,487677,298063,7485,4535,494
+271,claim,3480452052,22,a friend mentioned someone revealed that dubai is an island created by humans,not verified,active,69375,19933,6979,491,57
+272,claim,2801119656,60,a friend mentioned someone revealed that there are 7100+ islands in the philippines,not verified,active,485244,82596,30917,1114,539
+273,claim,7056979288,58,a friend mentioned someone revealed that the number of businesses allowing employees to bring pets to the workplace has grown by 6% worldwide,not verified,active,495194,148995,31948,116,31
+274,claim,3305269208,35,a friend mentioned someone revealed that the average british driver will spend around 99 days of their life stuck in traffic,not verified,active,216659,38472,9521,647,392
+275,claim,6662549277,5,a friend mentioned someone revealed that the first electric vehicle was created in 1832,not verified,active,999653,45323,12923,101,50
+276,claim,1913260809,31,a friend mentioned someone revealed that the car radio was first introduced in 1922,not verified,active,708456,183100,12592,884,253
+277,claim,9839369035,43,"a friend mentioned someone revealed that 99% of individuals in denmark, ireland and the united arab emirates have internet access",not verified,active,786965,244088,12754,4839,2772
+278,claim,7876014050,11,a friend mentioned someone revealed that the longest recorded cricket match lasted 14 days,not verified,active,833032,385435,48811,9604,1735
+279,claim,5984230851,50,"a friend mentioned someone revealed that 1920 was the last time the event ""tug-of-war"" was played in the summer olympics",not verified,banned,398689,260997,31854,2475,779
+280,claim,7275607765,20,"a friend mentioned someone revealed that shanghai, china has the world's longest subway system",not verified,active,578974,143812,3717,758,377
+281,claim,4276359633,8,"a friend mentioned someone revealed that london, england has the world's oldest subway system",not verified,active,404233,58146,19761,903,414
+282,claim,6109406664,19,a friend mentioned someone revealed that the cheetah is the fastest land animal on earth,not verified,active,945583,113936,339,867,568
+283,claim,7619002671,56,a friend mentioned someone revealed that some sharks can glow in the dark,not verified,active,794058,386372,101561,8564,228
+284,claim,8883048293,23,a friend mentioned someone revealed that the volcano olympus mons on mars is over 3 times taller than mount everest,not verified,active,414976,245153,82406,2235,828
+285,claim,3159626510,9,a friend mentioned someone revealed that jupiter has the most moons,verified,active,201670,22128,7196,231,114
+286,claim,3334878285,51,a friend mentioned someone revealed that a single day on venus takes 243 earth days,not verified,active,126115,63020,17190,1386,406
+287,claim,6673099357,45,a friend mentioned someone revealed that pluto could theoretically sustain life,not verified,active,182579,114340,33746,2531,1101
+288,claim,6195232838,23,a friend mentioned someone revealed that mars has running water,not verified,under review,349348,3974,1105,92,32
+289,claim,3614999744,50,"a friend mentioned someone revealed that through the seasons, a reindeer’s eyes will change color",not verified,active,898054,74942,18695,1723,1076
+290,claim,6372679230,44,a friend mentioned someone revealed that avocados never ripen while they are still attached to the tree,not verified,active,268304,148803,45166,963,496
+291,claim,5457144315,15,a friend mentioned someone revealed that australia has the most number of venomous snakes worldwide,not verified,banned,920073,411072,27692,5621,443
+292,claim,9587616903,60,a friend mentioned someone revealed that a crocodile cannot stick its tongue out,not verified,under review,703576,223727,79682,4767,443
+293,claim,9943041250,46,a friend mentioned someone revealed that artificial banana flavoring is based on an extinct banana type,not verified,active,456405,39280,9624,810,274
+294,claim,8432090754,17,a friend mentioned someone revealed that ancient egyptians slept on pillows made of stone,not verified,active,102407,1181,242,12,3
+295,claim,4390820789,48,a friend mentioned someone revealed that the people who are currently alive are only 7% of the total number of people who have ever lived,verified,active,752581,367283,36586,4315,1343
+296,claim,2109729049,35,"a friend mentioned someone revealed that in japan, its considered good luck when a sumo wrestler makes your baby cry",verified,active,678567,69121,22827,1063,323
+297,claim,3853093831,52,a friend mentioned someone revealed that armadillos have bulletproof shells,not verified,active,538890,303351,90741,920,20
+298,claim,6996144926,10,a friend mentioned someone revealed that an espresso maker has been sent to space,not verified,active,164604,101080,24432,834,518
+299,claim,2195778092,29,a friend mentioned someone revealed that the first commercial airplane flight lasted 23 minutes,verified,active,282723,23789,5528,175,29
