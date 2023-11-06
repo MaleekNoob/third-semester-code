@@ -1,94 +1,93 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
-struct Node {
-    int data;
-    Node* left;
-    Node* right;
-
-    Node() {
-        data = 0;
-        left = NULL;
-        right = NULL;
-    }
-
-    Node(int data) {
-        this->data = data;
-        left = NULL;
-        right = NULL;
-    }
-};
-
-class BST {
-    private:
-    Node* root;
-
+class Node {
     public:
+        int data;
+        Node* left;
+        Node* right;
 
-    BST() {
-        root = nullptr;
-    }
-
-    BST(Node* root) {
-        this->root = root;
-    }
-
-    // BST* insert(BST* root, int data) {
-    //     if (root == NULL) {
-    //         return new BST(data);
-    //     }
-
-    //     if (root->data < data) {
-    //         root->right = insert(root->right, data);
-    //     }
-    //     else if (root->data > data) {
-    //         root->left = insert(root->left, data);
-    //     }
-
-    //     return root;
-    // }
-
-    void insert(int data) {
-        Node* newNode = new Node(data);
-
-        if (root == NULL) {
-            root = newNode;
-            return;
+        Node(int data) {
+            this->data = data;
+            this->left = NULL;
+            this->right = NULL;
         }
-
-        Node* temp = root;
-        while (temp != NULL) {
-            if (temp->data < data) {
-                if (temp->right == NULL) {
-                    temp->right = newNode;
-                    return;
-                }
-                temp = temp->right;
-            }
-            else if (temp->data > data) {
-                if (temp->left == NULL) {
-                    temp->left = newNode;
-                    return;
-                }
-                temp = temp->left;
-            }
-        }
-    }
-
 };
+
+Node* insertData(Node* &root, int data) {
+    if (root == NULL) {
+        Node* newNode = new Node(data);
+        return newNode;
+    }
+
+    if (data < root->data) {
+        root->left = insertData(root->left, data);
+    } else if (data > root->data) {
+        root->right = insertData(root->right, data);
+    }
+
+    return root;
+}
+
+void inputData(Node* &root) {
+    int data;
+    cin >> data;
+
+    while (data != -1) {
+        root = insertData(root, data);
+        cin >> data;
+    }
+}
+
+void InOrder(Node* root) {
+    if (root == NULL) {
+        return;
+    }
+
+    InOrder(root->left);
+    cout << root->data << " ";
+    InOrder(root->right);
+}
+
+void levelOrderTraversal(Node* root) {
+    if (root == NULL) {
+        return;
+    }
+
+    queue<Node*> q;
+    q.push(root);
+    q.push(NULL);
+
+    while (!q.empty()) {
+        Node* front = q.front();
+        q.pop();
+
+        if (front == NULL) {
+            cout << endl;
+            if (!q.empty()) {
+                q.push(NULL);
+            }
+        } else {
+            cout << front->data << " ";
+            if (front->left != NULL) {
+                q.push(front->left);
+            }
+            if (front->right != NULL) {
+                q.push(front->right);
+            }
+        }
+    }
+}
 
 int main() {
 
-    // BST b, *root = NULL;
-    // root = b.insert(root, 50);
-    // root = b.insert(root, 30);
-    // root = b.insert(root, 20);
-    // root = b.insert(root, 40);
-    // root = b.insert(root, 70);
-    // root = b.insert(root, 60);
-    // root = b.insert(root, 80);
+    Node* root = NULL;
+    cout << "Enter data for binary search tree (Press -1 to stop): " << endl;
+    inputData(root);
 
-    // b.inorder(root);
+    cout << "\nLevel order traversal: ";
+    levelOrderTraversal(root);
 
     return 0;
 }
