@@ -104,9 +104,9 @@ class FileManagementTree {
     private:
     TreeNode *root;
 
-    void choiceValidationOneToFour(int &num) {
-        if (num < 1 || num > 4) {
-            cout << endl << "Invalid operation. Please select between 1 to 4: ";
+    void choiceValidationOneToTen(int &num) {
+        if (num < 1 || num > 10) {
+            cout << endl << "Invalid operation. Please select between 1 to 10: ";
             cin >> num;
         }
     }
@@ -162,36 +162,35 @@ class FileManagementTree {
 
     void CreateFileAndDirectories(TreeNode *current)
     {
-
-        while (current != nullptr)
+        int choice = 0;
+        while (choice != 10)
         {
             cout << endl
-                 << current->path;
+                << current->path;
             cout << endl
-                 << "Current Directory: " << current->name << " " << current->type;
+                << "Current Directory: " << current->name << " " << current->type;
             cout << endl
-                 << endl
-                 << "List of children: ";
+                << endl
+                << "List of children: ";
             listNode<TreeNode *> *traverse = current->children.getHead();
             int i = 0;
             while (traverse != nullptr)
             {
                 cout << endl
-                     << traverse->data->type << " " << i + 1 << ": " << traverse->data->name;
+                    << traverse->data->type << " " << i + 1 << ": " << traverse->data->name;
                 traverse = traverse->next;
                 i++;
             }
 
             cout << endl
-                 << "\n1. Open Specific directory\n2. Create new Directory\n3. Create new File\n4. Exit\nEnter choice: ";
-            int choice = 0;
+                << "\n1. Open Specific directory\n2. Create new Directory\n3. Create new File\n4. Level Order Display\n5. Merge Directories\n6. Delete\n7. Rename\n8. \n10. Exit\nEnter choice: ";
             cin >> choice;
-            choiceValidationOneToFour(choice);
-
+            choiceValidationOneToTen(choice);
             switch (choice)
             {
                 case 1:
                 {
+                    /* Create new Directory */
                     cout << endl
                         << "Enter the name of directory: ";
                     string directory_name;
@@ -202,7 +201,6 @@ class FileManagementTree {
                         if (directory_name == traverse->data->name && traverse->data->type == "directory")
                         {
                             CreateFileAndDirectories(traverse->data);
-                            return;
                         }
                         if (traverse->data->type != "directory")
                         {
@@ -217,6 +215,7 @@ class FileManagementTree {
 
                 case 2:
                 {
+                    /* Create new Directory */
                     cout << endl
                         << "Enter directory name: ";
                     string directory_name;
@@ -229,6 +228,7 @@ class FileManagementTree {
 
                 case 3:
                 {
+                    /* Create new File */
                     string file_name, file_type;
                     cout << endl
                         << "Enter file name: ";
@@ -244,7 +244,13 @@ class FileManagementTree {
 
                 case 4:
                 {
-                    return;
+                    /* Level-order traversal */
+                    displayFileStructure();
+                    break;
+                }
+
+                case 10:
+                {
                     break;
                 }
 
@@ -260,7 +266,7 @@ class FileManagementTree {
 public:
     FileManagementTree() {  /*Build tree*/
         // Create the root directory
-        root = new TreeNode("root", "root/", "directory");
+        root = new TreeNode("root", "root", "directory");
 
         // Create directories and files
         createDirectory(root, "PatientData");
