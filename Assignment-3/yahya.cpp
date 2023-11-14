@@ -153,7 +153,14 @@ class FileManagementTree {
     private:
     TreeNode *root;
 
-    public:
+    void choiceValidationOneToFour(int &num) {
+        if (num < 1 || num > 4) {
+            cout << endl << "Invalid operation. Please select between 1 to 4: ";
+            cin >> num;
+        }
+    }
+
+public:
     FileManagementTree() {  /*Build tree*/
         // Create the root directory
         root = new TreeNode("Root", "/", "directory");
@@ -163,8 +170,12 @@ class FileManagementTree {
         createDirectory(root, "Logs");
     }
 
-    void CreateFileAndDirectories() {
+    void UserCommandInterface() {
         TreeNode *current = root;
+        CreateFileAndDirectories(current);
+    }
+
+    void CreateFileAndDirectories(TreeNode* current) {
 
         while (current != nullptr) {
             cout << endl << current->path;
@@ -178,15 +189,74 @@ class FileManagementTree {
                 i++;
             }
 
-            cout << endl << "\n1. Open Specific directory\n2. Create new File or Directory\n3. Exit\nEnter choice: ";
-            int choice;
+            cout << endl << "\n1. Open Specific directory\n2. Create new Directory\n3. Create new File\n4. Exit\nEnter choice: ";
+            int choice = 0;
             cin >> choice;
+            choiceValidationOneToFour(choice);
+
+            switch (choice)
+            {
+            case 1:
+            {
+                cout << endl << "Enter the name of directory: ";
+                string directory_name;
+                cin >> directory_name;
+                traverse = current->children.getHead();
+                while (traverse != nullptr) {
+                    if (directory_name == traverse->data->name && traverse->data->type == "directory") {
+                        CreateFileAndDirectories(traverse->data);
+                        return;
+                    }
+                    if (traverse->data->type != "directory") {
+                        cout << endl << "File cannot be further opened";
+                    }
+                    traverse = traverse->next;
+                }
+
+                break;
+            }
+
+            case 2:
+            {
+                cout << endl << "Enter directory name: ";
+                string directory_name;
+                cin >> directory_name;
+                createDirectory(current, directory_name);
+                cout << endl << "New directory created successfully";
+                break;
+            }
+
+            case 3:
+            {
+                string file_name, file_type;
+                cout << endl << "Enter file name: ";
+                cin >> file_name;
+                cout << endl << "Enter file type: ";
+                cin >> file_type;
+                createFile(current, file_name, file_type);
+                cout << endl << "New file created successfully";
+                break;
+            }
+
+            case 4:
+            {
+                return;
+                break;
+            }
+
+            default:
+            {
+                cout << "Heavy Error";
+                break;
+            }
+            }
         }
     }
 };
 
 int main()
 {
+    /*
     // Create the root directory
     TreeNode *root = new TreeNode("Root", "/", "directory");
 
@@ -204,6 +274,7 @@ int main()
 
     // Memory cleanup (free allocated memory)
     deleteTree(root);
+    */
 
     return 0;
 }
