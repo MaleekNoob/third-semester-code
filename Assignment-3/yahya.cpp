@@ -149,6 +149,42 @@ void deleteTree(TreeNode * root)
     }
 }
 
+class FileManagementTree {
+    private:
+    TreeNode *root;
+
+    public:
+    FileManagementTree() {  /*Build tree*/
+        // Create the root directory
+        root = new TreeNode("Root", "/", "directory");
+
+        // Create directories and files
+        createDirectory(root, "PatientData");
+        createDirectory(root, "Logs");
+    }
+
+    void CreateFileAndDirectories() {
+        TreeNode *current = root;
+
+        while (current != nullptr) {
+            cout << endl << current->path;
+            cout << endl << "Current Directory: " << current->name << " " << current->type;
+            cout << endl << endl << "List of children: ";
+            listNode<TreeNode*>* traverse = current->children.getHead();
+            int i = 0;
+            while (traverse != nullptr) {
+                cout << endl << traverse->data->type << i << ": " << traverse->data->name;
+                traverse = traverse->next;
+                i++;
+            }
+
+            cout << endl << "\n1. Open Specific directory\n2. Create new File or Directory\n3. Exit\nEnter choice: ";
+            int choice;
+            cin >> choice;
+        }
+    }
+};
+
 int main()
 {
     // Create the root directory
