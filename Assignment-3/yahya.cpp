@@ -100,55 +100,6 @@ struct TreeNode
     TreeNode(string n, string p, string t) : name(n), path(p), type(t) {}
 };
 
-// Function to create a new directory in the tree
-TreeNode *createDirectory(TreeNode * parent, string dirName)
-{
-    string dirPath = parent->path + "/" + dirName;
-    TreeNode *newDir = new TreeNode(dirName, dirPath, "directory");
-    parent->children.push_back(newDir);
-    return newDir;
-}
-
-// Function to create a new file in the tree
-TreeNode *createFile(TreeNode * parent, string fileName, string fileType)
-{
-    string filePath = parent->path + "/" + fileName + "." + fileType;
-    TreeNode *newFile = new TreeNode(fileName, filePath, "file");
-    parent->children.push_back(newFile);
-    return newFile;
-}
-
-// Function to display the tree (pre-order traversal)
-void displayTree(TreeNode * root)
-{
-    if (root != nullptr)
-    {
-        cout << root->name << " (" << root->type << ") - " << root->path << endl;
-
-        listNode<TreeNode *> *current = root->children.getHead();
-        while (current != nullptr)
-        {
-            displayTree(current->data);
-            current = current->next;
-        }
-    }
-}
-
-// Function to delete the tree and free memory
-void deleteTree(TreeNode * root)
-{
-    if (root != nullptr)
-    {
-        listNode<TreeNode *> *current = root->children.getHead();
-        while (current != nullptr)
-        {
-            deleteTree(current->data);
-            current = current->next;
-        }
-        delete root;
-    }
-}
-
 class FileManagementTree {
     private:
     TreeNode *root;
@@ -160,10 +111,156 @@ class FileManagementTree {
         }
     }
 
+    // Function to create a new directory in the tree
+    TreeNode *createDirectory(TreeNode *parent, string dirName)
+    {
+        string dirPath = parent->path + "/" + dirName;
+        TreeNode *newDir = new TreeNode(dirName, dirPath, "directory");
+        parent->children.push_back(newDir);
+        return newDir;
+    }
+
+    // Function to create a new file in the tree
+    TreeNode *createFile(TreeNode *parent, string fileName, string fileType)
+    {
+        string filePath = parent->path + "/" + fileName + "." + fileType;
+        TreeNode *newFile = new TreeNode(fileName, filePath, "file");
+        parent->children.push_back(newFile);
+        return newFile;
+    }
+
+    // Function to display the tree (pre-order traversal)
+    void displayTree(TreeNode *root)
+    {
+        if (root != nullptr)
+        {
+            cout << root->name << " (" << root->type << ") - " << root->path << endl;
+
+            listNode<TreeNode *> *current = root->children.getHead();
+            while (current != nullptr)
+            {
+                displayTree(current->data);
+                current = current->next;
+            }
+        }
+    }
+
+    // Function to delete the tree and free memory
+    void deleteTree(TreeNode *root)
+    {
+        if (root != nullptr)
+        {
+            listNode<TreeNode *> *current = root->children.getHead();
+            while (current != nullptr)
+            {
+                deleteTree(current->data);
+                current = current->next;
+            }
+            delete root;
+        }
+    }
+
+    void CreateFileAndDirectories(TreeNode *current)
+    {
+
+        while (current != nullptr)
+        {
+            cout << endl
+                 << current->path;
+            cout << endl
+                 << "Current Directory: " << current->name << " " << current->type;
+            cout << endl
+                 << endl
+                 << "List of children: ";
+            listNode<TreeNode *> *traverse = current->children.getHead();
+            int i = 0;
+            while (traverse != nullptr)
+            {
+                cout << endl
+                     << traverse->data->type << " " << i + 1 << ": " << traverse->data->name;
+                traverse = traverse->next;
+                i++;
+            }
+
+            cout << endl
+                 << "\n1. Open Specific directory\n2. Create new Directory\n3. Create new File\n4. Exit\nEnter choice: ";
+            int choice = 0;
+            cin >> choice;
+            choiceValidationOneToFour(choice);
+
+            switch (choice)
+            {
+                case 1:
+                {
+                    cout << endl
+                        << "Enter the name of directory: ";
+                    string directory_name;
+                    cin >> directory_name;
+                    traverse = current->children.getHead();
+                    while (traverse != nullptr)
+                    {
+                        if (directory_name == traverse->data->name && traverse->data->type == "directory")
+                        {
+                            CreateFileAndDirectories(traverse->data);
+                            return;
+                        }
+                        if (traverse->data->type != "directory")
+                        {
+                            cout << endl
+                                << "File cannot be further opened";
+                        }
+                        traverse = traverse->next;
+                    }
+
+                    break;
+                }
+
+                case 2:
+                {
+                    cout << endl
+                        << "Enter directory name: ";
+                    string directory_name;
+                    cin >> directory_name;
+                    createDirectory(current, directory_name);
+                    cout << endl
+                        << "New directory created successfully";
+                    break;
+                }
+
+                case 3:
+                {
+                    string file_name, file_type;
+                    cout << endl
+                        << "Enter file name: ";
+                    cin >> file_name;
+                    cout << endl
+                        << "Enter file type: ";
+                    cin >> file_type;
+                    createFile(current, file_name, file_type);
+                    cout << endl
+                        << "New file created successfully";
+                    break;
+                }
+
+                case 4:
+                {
+                    return;
+                    break;
+                }
+
+                default:
+                {
+                    cout << "Heavy Error";
+                    break;
+                }
+            }
+        }
+    }
+
 public:
     FileManagementTree() {  /*Build tree*/
         // Create the root directory
-        root = new TreeNode("Root", "/", "directory");
+        root = new TreeNode("root", "root/", "directory");
 
         // Create directories and files
         createDirectory(root, "PatientData");
@@ -175,83 +272,16 @@ public:
         CreateFileAndDirectories(current);
     }
 
-    void CreateFileAndDirectories(TreeNode* current) {
-
-        while (current != nullptr) {
-            cout << endl << current->path;
-            cout << endl << "Current Directory: " << current->name << " " << current->type;
-            cout << endl << endl << "List of children: ";
-            listNode<TreeNode*>* traverse = current->children.getHead();
-            int i = 0;
-            while (traverse != nullptr) {
-                cout << endl << traverse->data->type << i << ": " << traverse->data->name;
-                traverse = traverse->next;
-                i++;
-            }
-
-            cout << endl << "\n1. Open Specific directory\n2. Create new Directory\n3. Create new File\n4. Exit\nEnter choice: ";
-            int choice = 0;
-            cin >> choice;
-            choiceValidationOneToFour(choice);
-
-            switch (choice)
-            {
-            case 1:
-            {
-                cout << endl << "Enter the name of directory: ";
-                string directory_name;
-                cin >> directory_name;
-                traverse = current->children.getHead();
-                while (traverse != nullptr) {
-                    if (directory_name == traverse->data->name && traverse->data->type == "directory") {
-                        CreateFileAndDirectories(traverse->data);
-                        return;
-                    }
-                    if (traverse->data->type != "directory") {
-                        cout << endl << "File cannot be further opened";
-                    }
-                    traverse = traverse->next;
-                }
-
-                break;
-            }
-
-            case 2:
-            {
-                cout << endl << "Enter directory name: ";
-                string directory_name;
-                cin >> directory_name;
-                createDirectory(current, directory_name);
-                cout << endl << "New directory created successfully";
-                break;
-            }
-
-            case 3:
-            {
-                string file_name, file_type;
-                cout << endl << "Enter file name: ";
-                cin >> file_name;
-                cout << endl << "Enter file type: ";
-                cin >> file_type;
-                createFile(current, file_name, file_type);
-                cout << endl << "New file created successfully";
-                break;
-            }
-
-            case 4:
-            {
-                return;
-                break;
-            }
-
-            default:
-            {
-                cout << "Heavy Error";
-                break;
-            }
-            }
-        }
+    void displayFileStructure() {
+        TreeNode *current = root;
+        cout << endl << endl << "File Structure: ";
+        displayTree(current);
     }
+
+    void deallocateMemory() {
+        deleteTree(root);
+    }
+
 };
 
 int main()
@@ -275,6 +305,11 @@ int main()
     // Memory cleanup (free allocated memory)
     deleteTree(root);
     */
+
+   FileManagementTree filetree;
+   filetree.UserCommandInterface();
+   filetree.displayFileStructure();
+   filetree.deallocateMemory();
 
     return 0;
 }
