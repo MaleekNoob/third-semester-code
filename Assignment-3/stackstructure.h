@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 template <typename T>
 class Node {
@@ -40,7 +39,7 @@ public:
 
     T pop() {
         if (empty()) {
-            cout << "Stack underflow" << endl;
+            std::cout << "Stack underflow" << std::endl;
             return T();
         }
         Node<T>* temp = top;
@@ -53,7 +52,7 @@ public:
 
     T peek() const {
         if (empty()) {
-            cout << "Stack is empty" << endl;
+            std::cout << "Stack is empty" << std::endl;
             return T();
         }
         return top->data;

@@ -1,7 +1,9 @@
+#include "stackstructure.h"
 #include <fstream>
 #include <iomanip>
 #include <string>
-#include <stack.h>
+#include <filesystem>
+using namespace std;
 
 // Define a structure for a linked list node
 template <class T>
@@ -131,6 +133,30 @@ class FileManagementTree {
         if (num < 1 || num > 14) {
             cout << endl << "Invalid operation. Please select between 1 to 10: ";
             cin >> num;
+        }
+    }
+
+    void exportStructure(TreeNode *node, const std::filesystem::path &parentPath)
+    {
+        if (node == NULL)
+        {
+            return;
+        }
+
+        std::filesystem::path currentPath = parentPath / node->name;
+
+        if (node->type == "directory")
+        {
+            std::filesystem::create_directories(currentPath);
+        }
+        else if (node->type == "file")
+        {
+            std::ofstream outFile(currentPath);
+        }
+
+        for (listNode<TreeNode *> *current = node->children.getHead(); current != NULL; current = current->next)
+        {
+            exportStructure(current->data, currentPath);
         }
     }
 
@@ -452,13 +478,34 @@ class FileManagementTree {
                 case 12:
                 {
                     /* Exporting file structure */
-                    
+                    std::filesystem::path currentPath = std::filesystem::current_path();
+                    exportStructure(root, currentPath);
                     break;
                 }
 
                 case 13:
                 {
-                    /* Importing file */
+                    /* Importing */
+                    string file_name;
+                    cout << endl << "Enter name of file or directory to be imported: ";
+                    cin >> file_name;
+                    traverse = current->children.getHead();
+                    while (traverse != nullptr)
+                    {
+                        if (file_name == traverse->data->name)
+                        {
+                            cout << endl << "File or directory already exists" << endl;
+                            break;
+                        }
+                        traverse = traverse->next;
+                    }
+                    if (traverse == nullptr) {
+                        string file_type;
+                        cout << endl << "Enter file type: ";
+                        cin >> file_type;
+                        createFile(current, file_name, file_type);
+                        cout << endl << "File or directory imported successfully" << endl;
+                    }
                     break;
                 }
 
