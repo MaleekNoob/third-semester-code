@@ -136,6 +136,35 @@ class FileManagementTree {
         }
     }
 
+    void breakPathComponents(string path) {
+        cout << endl;
+        int starting_Index = 0;
+        bool is_directory = true;
+        for (int i = 0; i < path.length(); i++) {
+            if (path[i] == '/') {
+                string name;
+                for (int j = starting_Index; j < i; j++) {
+                    if (path[j] == '.') {
+                        is_directory = false;
+                        break;
+                    }
+                    name += path[j];
+                }
+                starting_Index = i + 1;
+                if (is_directory)
+                {
+                    cout << endl << "Directory: " << name;
+                }
+                else {
+                    cout << endl << "File: " << name;
+                }
+
+                is_directory = true;
+            }
+        }
+        cout << endl;
+    }
+
     void exportStructure(TreeNode *node, const std::filesystem::path &parentPath)
     {
         if (node == NULL)
@@ -486,25 +515,21 @@ class FileManagementTree {
                 case 13:
                 {
                     /* Importing */
-                    string file_name;
-                    cout << endl << "Enter name of file or directory to be imported: ";
-                    cin >> file_name;
-                    traverse = current->children.getHead();
-                    while (traverse != nullptr)
-                    {
-                        if (file_name == traverse->data->name)
-                        {
-                            cout << endl << "File or directory already exists" << endl;
-                            break;
-                        }
-                        traverse = traverse->next;
+                    string txt_file_name;
+                    cout << endl << "Enter the name of file from which file structure is to be imported (File must be of .txt type): ";
+                    cin >> txt_file_name;
+                    txt_file_name += ".txt";
+                    fstream file(txt_file_name, ios::in);
+                    
+                    if (!file.is_open()) {
+                        cout << endl << "File not found" << endl;
+                        break;
                     }
-                    if (traverse == nullptr) {
-                        string file_type;
-                        cout << endl << "Enter file type: ";
-                        cin >> file_type;
-                        createFile(current, file_name, file_type);
-                        cout << endl << "File or directory imported successfully" << endl;
+
+                    string path = "";
+                    while (!file.eof()) {
+                        getline(file, path);
+                        breakPathComponents(path);
                     }
                     break;
                 }
@@ -574,7 +599,6 @@ int main()
 
    FileManagementTree filetree;
    filetree.UserCommandInterface();
-   filetree.displayFileStructure();
    filetree.deallocateMemory();
 
     return 0;
