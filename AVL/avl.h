@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <queue>
-
+using namespace std;
 
 struct AVLTreeNode {
     int data;
@@ -18,7 +18,7 @@ class AVL {
     private:
     AVLTreeNode* root;
 
-    int getBalanceFactore(AVLTreeNode* root) {
+    int getBalanceFactor(AVLTreeNode* root) {
         if (root == nullptr) {
             return 0;
         }
