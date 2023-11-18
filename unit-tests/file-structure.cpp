@@ -1,3 +1,11 @@
+/*
+Remaining:
+Import feature
+
+Bug:
+Merge directories
+*/
+
 #include "stackstructure.h"
 #include <fstream>
 #include <iomanip>
@@ -136,17 +144,28 @@ class FileManagementTree {
         }
     }
 
+    TreeNode* InsertInFileStructure(string name, string type) {
+        if (this->root == nullptr) {
+            return new TreeNode(name, name, type);
+        }
+        else {
+        }
+    }
+
     void breakPathComponents(string path) {
         cout << endl;
         int starting_Index = 0;
         bool is_directory = true;
         for (int i = 0; i < path.length(); i++) {
-            if (path[i] == '/') {
+            if (path[i] == '/' || i == path.length() - 1) {
                 string name;
-                for (int j = starting_Index; j < i; j++) {
+                int limit = i;
+                if (i == path.length() - 1) {
+                    limit++;
+                }
+                for (int j = starting_Index; j < limit; j++) {
                     if (path[j] == '.') {
                         is_directory = false;
-                        break;
                     }
                     name += path[j];
                 }
@@ -527,10 +546,13 @@ class FileManagementTree {
                     }
 
                     string path = "";
+                    deleteTree(root);
+                    root = nullptr;
                     while (!file.eof()) {
                         getline(file, path);
                         breakPathComponents(path);
                     }
+                    exit(0);
                     break;
                 }
 
