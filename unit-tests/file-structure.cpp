@@ -55,6 +55,7 @@ public:
         }
     }
 
+    // Function to remove a node from the list
     void remove(T value) {
         listNode<T> *current = head;
         listNode<T> *prev = nullptr;
@@ -128,7 +129,7 @@ struct TreeNode
     TreeNode(string n, string p, string t) : name(n), path(p), type(t) {}
 
     void printTreeNode() {
-        cout << name << setw(55) << " (" << type << ") " << setw(55) << path << endl;
+        cout << name << setw(24) << " (" << type << ") " << setw(24) << path << endl;
     }
 };
 
@@ -231,7 +232,7 @@ class FileManagementTree {
     {
         if (root != nullptr)
         {
-            cout << root->name << setw(55) << " (" << root->type << ") " << setw(55) << root->path << endl;
+            cout << root->name << setw(24) << " (" << root->type << ") " << setw(24) << root->path << endl;
 
             listNode<TreeNode *> *current = root->children.getHead();
             while (current != nullptr)
@@ -279,17 +280,15 @@ class FileManagementTree {
                 i++;
             }
 
-            cout << endl
-                << "\n1. Open Specific directory\n2. Create new Directory\n3. Create new File\n4. Level Order Display\n5. Merge Directories\n6. Delete\n7. Rename\n8. Search by name or content\n9. Copy\n10. Cut\n11. Paste\n12. Export\n13. Import\n14. Exit\nEnter choice: ";
+            cout << endl << "\n1. Open Specific directory\n2. Create new Directory\n3. Create new File\n4. Level Order Display\n5. Merge Directories\n6. Delete\n7. Rename\n8. Search by name or content\n9. Copy\n10. Cut\n11. Paste\n12. Export\n13. Import\n14. Exit\nEnter choice: ";
             cin >> choice;
             choiceValidationOneToTen(choice);
             switch (choice)
             {
                 case 1:
                 {
-                    /* Create new Directory */
-                    cout << endl
-                        << "Enter the name of directory: ";
+                    /* Open Specific directory */
+                    cout << endl << "Enter the name of directory: ";
                     string directory_name;
                     cin >> directory_name;
                     traverse = current->children.getHead();
@@ -313,13 +312,23 @@ class FileManagementTree {
                 case 2:
                 {
                     /* Create new Directory */
-                    cout << endl
-                        << "Enter directory name: ";
-                    string directory_name;
-                    cin >> directory_name;
-                    createDirectory(current, directory_name);
-                    cout << endl
-                        << "New directory created successfully";
+                    int directoryChoice = 0;
+                    cout << endl << "1. Create new directory in current directory\n2. Create new directory by path\nEnter choice: ";
+                    cin >> directoryChoice;
+
+                    if (directoryChoice == 1) {
+                        cout << endl << "Enter directory name: ";
+                        string directory_name;
+                        cin >> directory_name;
+                        createDirectory(current, directory_name);
+                        cout << endl << "New directory created successfully";
+                    }
+                    else {
+                        string path;
+                        cout << endl << "Enter path: ";
+                        cin >> path;
+                        breakPathComponents(path);
+                    }
                     break;
                 }
 
