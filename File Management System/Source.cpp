@@ -1,12 +1,103 @@
 #include <iostream>
 #include <string>
-#include <queue>
-#include <stack>
 #include <list>
 #include <fstream>
 #include <iomanip>
 
 using namespace std;
+
+template <typename T>
+class queue
+{
+private:
+    struct Node
+    {
+        T data;
+        Node *next;
+        Node(const T &value) : data(value), next(nullptr) {}
+    };
+
+    Node *frontNode;
+    Node *rearNode;
+    size_t count;
+
+public:
+    queue() : frontNode(nullptr), rearNode(nullptr), count(0) {}
+
+    // Insert element at the back of the queue
+    void push(const T &value)
+    {
+        Node *newNode = new Node(value);
+        if (empty())
+        {
+            frontNode = rearNode = newNode;
+        }
+        else
+        {
+            rearNode->next = newNode;
+            rearNode = newNode;
+        }
+        count++;
+    }
+
+    // Remove the element at the front of the queue
+    void pop()
+    {
+        if (!empty())
+        {
+            Node *temp = frontNode;
+            frontNode = frontNode->next;
+            delete temp;
+            count--;
+            if (empty())
+            {
+                rearNode = nullptr;
+            }
+        }
+        else
+        {
+            std::cerr << "queue is empty. Cannot pop.\n";
+        }
+    }
+
+    // Access the element at the front of the queue
+    T &front()
+    {
+        if (!empty())
+        {
+            return frontNode->data;
+        }
+        else
+        {
+            throw std::out_of_range("queue is empty. Cannot access front element.");
+        }
+    }
+
+    // Access the element at the back of the queue
+    T &back()
+    {
+        if (!empty())
+        {
+            return rearNode->data;
+        }
+        else
+        {
+            throw std::out_of_range("queue is empty. Cannot access back element.");
+        }
+    }
+
+    // Check if the queue is empty
+    bool empty() const
+    {
+        return count == 0;
+    }
+
+    // Return the number of elements in the queue
+    size_t size() const
+    {
+        return count;
+    }
+};
 
 // Define the structure for the tree node
 struct Node {
