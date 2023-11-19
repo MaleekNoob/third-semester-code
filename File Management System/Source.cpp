@@ -240,15 +240,23 @@ public:
 
         while (!q.empty()) {
             Node* current = q.front();
+            if (current == nullptr) {
+                q.pop();
+                continue;
+            }
+
             q.pop();
 
             if (current->path == path) {
                 return current;
             }
 
-            for (Node* child : current->children) {
+            Node* child = current->children.front();
+            while (child != nullptr) {
                 q.push(child);
+                child = child->children.front();
             }
+
         }
 
         return nullptr;
@@ -299,7 +307,7 @@ public:
             cout << "11. Search for a file or directory" << endl;
             cout << "12. Export" << endl;
             cout << "13. Import" << endl;
-            cout << "Enter your choice: " << endl;
+            cout << "Enter your choice: ";
             cin >> choice;
 
             switch (choice) {
@@ -379,12 +387,24 @@ public:
                 break;
             case 10:
             {
-                string path;
-                cout << "Enter the path of the directory to open: ";
-                cin >> path;
+                string name;
+                cout << endl << "Enter the name of the directory to open: ";
+                cin >> name;
+
+                Node *node = findNodeByName(name);
+
+                if (node == nullptr) {
+                    cout << "Node not found." << endl;
+                    break;
+                }
+
+                if (node->type != "directory") {
+                    cout << "Node is not a directory." << endl;
+                    break;
+                }
 
                 for (Node* child : root->children) {
-                    if (child->path == path) {
+                    if (child->name == name) {
                         FeatureAccess(child);
                         break;
                     }
@@ -399,21 +419,33 @@ public:
                 cout << "2. Search by name" << endl;
                 cout << "Enter your choice: ";
                 cin >> choice;
-                if (choice == 1) {
+                if (choice == 2) {
                     string name;
                     cout << "Enter the name of the file or directory to search for: ";
                     cin >> name;
 
                     Node *node = findNodeByName(name);
+
+                    if (node == nullptr) {
+                        cout << "Node not found." << endl;
+                        break;
+                    }
+
                     cout << "Path: " << node->path << endl;
                     cout << "Type: " << node->type << endl;
                 }
-                else if (choice == 2) {
+                else if (choice == 1) {
                     string path;
                     cout << "Enter the path of the file or directory to search for: ";
                     cin >> path;
 
                     Node *node = findNodeByPath(path);
+
+                    if (node == nullptr) {
+                        cout << "Node not found." << endl;
+                        break;
+                    }
+
                     cout << "Name: " << node->name << endl;
                     cout << "Type: " << node->type << endl;
                 }
@@ -441,11 +473,139 @@ public:
                 string txt_file_name;
                 cout << endl << "Enter name of file to import file structure from: ";
                 cin >> txt_file_name;
+                txt_file_name += ".txt";
+
+                fstream infile(txt_file_name, ios::in);
+                string path;
+                deleteTree(root);
+                root = nullptr;
+                while (getline(infile, path)) {
+                    analyzePath(path);
+                }
             }
             default:
                 cout << "Invalid choice. Please try again." << endl;
             }
         }
+    }
+
+    // Member function to find a node by its name
+    Node *findTreeNode(Node *node, string name)
+    {
+        if (node == nullptr)
+        {
+            return nullptr;
+        }
+
+        if (node->name == name)
+        {
+            return node;
+        }
+
+        for (Node *child : node->children)
+        {
+            Node *result = findTreeNode(child, name);
+            if (result != nullptr)
+            {
+                return result;
+            }
+        }
+
+        return nullptr;
+    }
+
+    // Member function to insert a node into the tree
+    void insertNode(string name, string parent, string type) {
+        if (parent == "") {
+            if (type == "directory" && parent == "") {
+                root = new Node;
+                root->name = name;
+                root->path = name;
+                root->type = type;
+            }
+            else {
+                cout << "Root directory does not exist." << endl;
+                return;
+            }
+        }
+
+        // if (parent == "") {
+        //     if (name == root->name) {
+        //         // return;
+        //         return;
+        //     }
+        //     else {
+        //         cout << "Invalid path." << endl;
+        //         return;
+        //     }
+        // }
+
+        Node* ParentNode = findTreeNode(root, parent);
+        if (ParentNode == nullptr) {
+            cout << "Invalid path." << endl;
+            return;
+        }
+
+        // Traverse through parent children using while loop to see if name already exists. If it does exist, return
+        for (Node* child : ParentNode->children) {
+            if (child->name == name) {
+                cout << "Node already exists." << endl;
+                return;
+            }
+        }
+
+        Node* newNode = new Node;
+        newNode->name = name;
+        newNode->path = ParentNode->path + "/" + name;
+        newNode->type = type;
+
+        ParentNode->children.push_back(newNode);
+
+    }
+
+    void analyzePath(string path) {
+        cout << "Path: " << path << endl;
+        int nameStartIndex = 0;
+        bool is_directory = true;
+        string name, parent = "";
+        for (int i = 0; i < path.length(); i++) {
+            if (path[i] == '/' || i == path.length() - 1) {
+                name = path.substr(nameStartIndex, i);
+                if (i == path.length() - 1) {
+                    name += path[i];
+                }
+
+                for (int j = 0; j < name.length(); j++) {
+                    if (name[j] == '.') {
+                        is_directory = false;
+                        break;
+                    }
+                }
+
+                if (!is_directory) {
+                    // Create a file
+                    insertNode(name, parent, "file");
+                }
+                else {
+                    // Create a directory
+                    insertNode(name, parent, "directory");
+                }
+                parent = name;
+                nameStartIndex = i + 1;
+            }
+        }
+    }
+
+    void deleteTree(Node* node) {
+        if (node == nullptr) {
+            return;
+        }
+
+        for (Node* child : node->children) {
+            deleteTree(child);
+        }
+
+        delete node;
     }
 
     void UserInterface() {
