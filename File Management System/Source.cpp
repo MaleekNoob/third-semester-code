@@ -3,6 +3,7 @@
 #include <list>
 #include <fstream>
 #include <iomanip>
+#include <vector>
 
 using namespace std;
 
@@ -105,6 +106,31 @@ struct Node {
     string path;
     string type;
     list<Node*> children;
+
+    Node() {
+        name = "";
+        path = "";
+        type = "";
+    }
+
+    Node(string name) {
+        this->name = name;
+        path = "";
+        type = "";
+    }
+
+    Node(string name, string path, string type) {
+        this->name = name;
+        this->path = path;
+        this->type = type;
+    }
+
+    Node(Node& node) {
+        name = node.name;
+        path = node.path;
+        type = node.type;
+        children = node.children;
+    }
 };
 
 // Define the class for the file management system
@@ -130,6 +156,8 @@ public:
         else {
             cout << "Root directory already exists." << endl;
         }
+        root->children.push_back(new Node("PateintData", "root/PateintData", "directory"));
+        root->children.push_back(new Node("Logs", "root/Logs", "directory"));
     }
 
     // Member function to create a new directory within another directory
@@ -178,26 +206,36 @@ public:
         cout << "Node deleted successfully." << endl;
     }
 
-    // Member function to display the tree structure in level order
-    void displayTree() {
-        if (root == nullptr) {
+    void displayTreeHelper(Node *node, int level)
+    {
+        if (node == nullptr)
+        {
+            return;
+        }
+
+        // Print the node with indentation
+        for (int i = 0; i < level; ++i)
+        {
+            cout << '\t';
+        }
+        cout << node->path << " (" << node->type << ")" << endl;
+
+        // Recursively print the children
+        for (Node *child : node->children)
+        {
+            displayTreeHelper(child, level + 1);
+        }
+    }
+
+    void displayTree()
+    {
+        if (root == nullptr)
+        {
             cout << "Root directory does not exist." << endl;
             return;
         }
 
-        queue<Node*> q;
-        q.push(root);
-
-        while (!q.empty()) {
-            Node* current = q.front();
-            q.pop();
-
-            cout << current->path << " (" << current->type << ")" << endl;
-
-            for (Node* child : current->children) {
-                q.push(child);
-            }
-        }
+        displayTreeHelper(root, 0);
     }
 
     // Assuming you have a global variable to hold the cut node
@@ -353,6 +391,42 @@ public:
         return nullptr;
     }
 
+    // Create a directory by path
+    void CreateDirectoryByPath(string path) {
+        vector<string> directories;
+        stringstream ss(path);
+        string dir;
+
+        // Split path by '/'
+        while (getline(ss, dir, '/')) {
+            directories.push_back(dir);
+        }
+
+        // Start from the root
+        Node* current = root;
+
+        // Traverse the tree according to the path
+        for (int i = 0; i < directories.size() - 1; ++i) {
+            bool found = false;
+            for (Node* child : current->children) {
+                if (child->name == directories[i]) {
+                    current = child;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                cout << "Directory " << directories[i] << " not found." << endl;
+                return;
+            }
+        }
+
+        // Create a new directory and add it to the parent's children
+        Node* newDir = new Node(directories.back());
+        current->children.push_back(newDir);
+    }
+
+
     // Member function to write the path of all nodes to a file
     void writePathOfAllNodes(Node* node, ofstream& file) {
         if (node == nullptr) {
@@ -366,12 +440,35 @@ public:
         }
     }
 
+    Node* GiveParentOf(Node* node) {
+        if (node == root) {
+            return nullptr;
+        }
+
+        queue<Node*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            Node* current = q.front();
+            q.pop();
+
+            for (Node* child : current->children) {
+                if (child == node) {
+                    return current;
+                }
+                q.push(child);
+            }
+        }
+
+        return nullptr;
+    }
+
     void FeatureAccess(Node* root) {
         Node *clipboard = nullptr;   // global storage for cut/copied node
         bool isCutOperation = false; // to distinguish between cut and copy operations
 
-        int choice;
-        while (true) {
+        int choice = 0;
+        while (choice != 9) {
             cout << endl << "Path: " << root->path << endl; // "root" is the name of the root directory.
             cout << endl << "Current Directory: " << root->name << endl;
             cout << endl << endl << "List of Children: " << endl;
@@ -398,6 +495,7 @@ public:
             cout << "11. Search for a file or directory" << endl;
             cout << "12. Export" << endl;
             cout << "13. Import" << endl;
+            cout << "14. Merge Directories" << endl;
             cout << "Enter your choice: ";
             cin >> choice;
 
@@ -474,7 +572,6 @@ public:
                 break;
             }
             case 9:
-                exit(0);
                 break;
             case 10:
             {
@@ -571,8 +668,31 @@ public:
                 deleteTree(root);
                 root = nullptr;
                 while (getline(infile, path)) {
-                    analyzePath(path);
+                    CreateDirectoryByPath(path);
                 }
+            }
+            case 14:
+            {
+                string toMerge, toMergeWith;
+                cout << "Enter name of directory to merge with: ";
+                cin >> toMergeWith;
+                cout << "Enter name of directory to merge: ";
+                cin >> toMerge;
+                Node* merge = findNodeByName(toMerge);
+                Node* mergeWith = findNodeByName(toMergeWith);
+                if (merge == nullptr || mergeWith == nullptr) {
+                    cout << "Invalid directory name." << endl;
+                    break;
+                }
+                cout << "Merging " << merge->name << " with " << mergeWith->name << endl;
+                for (Node* child : merge->children) {
+                    mergeWith->children.push_back(child);
+                }
+                Node* parentNode = GiveParentOf(merge);
+                parentNode->children.remove(merge);
+                // delete merge;
+                cout << endl << "Merged successfully";
+                break;
             }
             default:
                 cout << "Invalid choice. Please try again." << endl;
@@ -606,53 +726,53 @@ public:
     }
 
     // Member function to insert a node into the tree
-    void insertNode(string name, string parent, string type) {
-        if (parent == "") {
-            if (type == "directory" && parent == "") {
-                root = new Node;
-                root->name = name;
-                root->path = name;
-                root->type = type;
-            }
-            else {
-                cout << "Root directory does not exist." << endl;
-                return;
-            }
-        }
+    // void insertNode(string name, string parent, string type) {
+    //     if (parent == "") {
+    //         if (type == "directory" && parent == "") {
+    //             root = new Node;
+    //             root->name = name;
+    //             root->path = name;
+    //             root->type = type;
+    //         }
+    //         else {
+    //             cout << "Root directory does not exist." << endl;
+    //             return;
+    //         }
+    //     }
 
-        // if (parent == "") {
-        //     if (name == root->name) {
-        //         // return;
-        //         return;
-        //     }
-        //     else {
-        //         cout << "Invalid path." << endl;
-        //         return;
-        //     }
-        // }
+    //     // if (parent == "") {
+    //     //     if (name == root->name) {
+    //     //         // return;
+    //     //         return;
+    //     //     }
+    //     //     else {
+    //     //         cout << "Invalid path." << endl;
+    //     //         return;
+    //     //     }
+    //     // }
 
-        Node* ParentNode = findTreeNode(root, parent);
-        if (ParentNode == nullptr) {
-            cout << "Invalid path." << endl;
-            return;
-        }
+    //     Node* ParentNode = findTreeNode(root, parent);
+    //     if (ParentNode == nullptr) {
+    //         cout << "Invalid path." << endl;
+    //         return;
+    //     }
 
-        // Traverse through parent children using while loop to see if name already exists. If it does exist, return
-        for (Node* child : ParentNode->children) {
-            if (child->name == name) {
-                cout << "Node already exists." << endl;
-                return;
-            }
-        }
+    //     // Traverse through parent children using while loop to see if name already exists. If it does exist, return
+    //     for (Node* child : ParentNode->children) {
+    //         if (child->name == name) {
+    //             cout << "Node already exists." << endl;
+    //             return;
+    //         }
+    //     }
 
-        Node* newNode = new Node;
-        newNode->name = name;
-        newNode->path = ParentNode->path + "/" + name;
-        newNode->type = type;
+    //     Node* newNode = new Node;
+    //     newNode->name = name;
+    //     newNode->path = ParentNode->path + "/" + name;
+    //     newNode->type = type;
 
-        ParentNode->children.push_back(newNode);
+    //     ParentNode->children.push_back(newNode);
 
-    }
+    // }
 
     void analyzePath(string path) {
         cout << "Path: " << path << endl;
@@ -675,11 +795,11 @@ public:
 
                 if (!is_directory) {
                     // Create a file
-                    insertNode(name, parent, "file");
+                    // insertNode(name, parent, "file");
                 }
                 else {
                     // Create a directory
-                    insertNode(name, parent, "directory");
+                    // insertNode(name, parent, "directory");
                 }
                 parent = name;
                 nameStartIndex = i + 1;

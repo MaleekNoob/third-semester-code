@@ -194,20 +194,33 @@ private:
         return newFile;
     }
 
-    // Function to display the tree (pre-order traversal)
-    void displayTree(TreeNode *root)
+    // Helper function to display the tree (pre-order traversal)
+    void displayTreeHelper(TreeNode *root, int level)
     {
         if (root != nullptr)
         {
+            // Print tabs for current level
+            for (int i = 0; i < level; ++i)
+            {
+                cout << '\t';
+            }
+
             cout << root->name << setw(24) << " (" << root->type << ") " << setw(24) << root->path << endl;
 
             listNode<TreeNode *> *current = root->children.getHead();
             while (current != nullptr)
             {
-                displayTree(current->data);
+                // Recursively print children with increased level
+                displayTreeHelper(current->data, level + 1);
                 current = current->next;
             }
         }
+    }
+
+    // Function to display the tree
+    void displayTree(TreeNode *root)
+    {
+        displayTreeHelper(root, 0);
     }
 
     // Function to delete the tree and free memory
