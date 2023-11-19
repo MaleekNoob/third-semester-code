@@ -548,10 +548,10 @@ private:
                      << "1. Search by name\n2. Search by content\n3. Search by path\nEnter choice: ";
                 cin >> name_or_content;
 
-                while (name_or_content < 1 || name_or_content > 2)
+                while (name_or_content < 1 || name_or_content > 3)
                 {
                     cout << endl
-                         << "Invalid choice. Please select between 1 to 2: ";
+                         << "Invalid choice. Please select between 1 to 3: ";
                     cin >> name_or_content;
                 }
 
@@ -766,6 +766,13 @@ private:
                 {
                     cout << endl
                          << "File not found" << endl;
+                    break;
+                }
+
+                if (file.peek() == std::ifstream::traits_type::eof())
+                {
+                    cout << endl
+                         << "File is empty" << endl;
                     break;
                 }
 
