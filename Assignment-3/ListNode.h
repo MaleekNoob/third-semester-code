@@ -1,3 +1,8 @@
+/*
+Name : Maleek Hussain Ali
+Roll No. : 22I-1526
+Section : B
+*/ 
 #pragma once
 
 // Define a structure for a linked list node
