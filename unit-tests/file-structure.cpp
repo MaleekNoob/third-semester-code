@@ -296,27 +296,16 @@ class FileManagementTree {
         cout << endl;
     }
 
-    void exportStructure(TreeNode *node, const std::filesystem::path &parentPath)
-    {
-        if (node == NULL)
-        {
+    void exportStructure(TreeNode *node, fstream &outFile) {
+        if (node == nullptr) {
             return;
         }
-
-        std::filesystem::path currentPath = parentPath / node->name;
-
-        if (node->type == "directory")
+        outFile << node->path << endl;
+        listNode<TreeNode *> *traverse = node->children.getHead();
+        while (traverse != nullptr)
         {
-            std::filesystem::create_directories(currentPath);
-        }
-        else if (node->type == "file")
-        {
-            std::ofstream outFile(currentPath);
-        }
-
-        for (listNode<TreeNode *> *current = node->children.getHead(); current != NULL; current = current->next)
-        {
-            exportStructure(current->data, currentPath);
+            exportStructure(traverse->data, outFile);
+            traverse = traverse->next;
         }
     }
 
@@ -557,19 +546,42 @@ class FileManagementTree {
                 case 6:
                 {
                     /* Delete */
-                    string file_name;
-                    cout << endl << "Enter name of file or directory to be deleted: ";
-                    cin >> file_name;
-                    traverse = current->children.getHead();
-                    while (traverse != nullptr)
+                    int deleteChoice = 0;
+                    cout << endl << "1. Delete by name\n2. Delete by path\nEnter choice: ";
+                    cin >> deleteChoice;
+
+                    if (deleteChoice == 1)
                     {
-                        if (file_name == traverse->data->name)
+                        string file_name;
+                        cout << endl << "Enter name of file or directory to be deleted: ";
+                        cin >> file_name;
+                        traverse = current->children.getHead();
+                        while (traverse != nullptr)
                         {
-                            current->children.remove(traverse->data);
-                            cout << endl << "File or directory deleted successfully";
+                            if (file_name == traverse->data->name)
+                            {
+                                current->children.remove(traverse->data);
+                                cout << endl << "File or directory deleted successfully";
+                                break;
+                            }
+                            traverse = traverse->next;
+                        }
+                    }
+                    else if (deleteChoice == 2)
+                    {
+                        string file_path;
+                        cout << endl << "Enter path of file or directory to be deleted: ";
+                        cin >> file_path;
+                        TreeNode* temp = FindTreeNodeByPath(root, file_path);
+                        if (temp == nullptr) {
+                            cout << endl << "Invalid path";
                             break;
                         }
-                        traverse = traverse->next;
+                        current->children.remove(temp);
+                        cout << endl << "File or directory deleted successfully";
+                    }
+                    else {
+                        cout << endl << "Invalid choice";
                     }
                     break;
                 }
@@ -577,9 +589,30 @@ class FileManagementTree {
                 case 7:
                 {
                     /* Rename */
+                    int renameChoice = 0;
+                    cout << endl << "1. Rename by name\n2. Rename by path\nEnter choice: ";
+                    cin >> renameChoice;
                     string file_name;
-                    cout << endl << "Enter name of file or directory to be renamed: ";
-                    cin >> file_name;
+
+                    if (renameChoice == 1)
+                    {
+                        cout << endl << "Enter name of file or directory to be renamed: ";
+                        cin >> file_name;
+                    }
+                    else if (renameChoice == 2) {
+                        cout << endl << "Enter path of file or directory to be renamed: ";
+                        cin >> file_name;
+                        TreeNode* temp = FindTreeNodeByPath(root, file_name);
+                        if (temp == nullptr) {
+                            cout << endl << "Invalid path";
+                            break;
+                        }
+                        file_name = temp->name;
+                    }
+                    else {
+                        cout << endl << "Invalid choice";
+                        break;
+                    }
                     traverse = current->children.getHead();
                     while (traverse != nullptr)
                     {
@@ -600,7 +633,7 @@ class FileManagementTree {
                 {
                     /* Search by name or content */
                     int name_or_content = 0;
-                    cout << endl << "1. Search by name\n2. Search by content\nEnter choice: ";
+                    cout << endl << "1. Search by name\n2. Search by content\n3. Search by path\nEnter choice: ";
                     cin >> name_or_content;
 
                     while (name_or_content < 1 || name_or_content > 2) {
@@ -624,7 +657,7 @@ class FileManagementTree {
                             traverse = traverse->next;
                         }
                     }
-                    else if (name_or_content = 2) {
+                    else if (name_or_content == 2) {
                         string file_content;
                         cout << endl << "Enter content of file to be searched(file type): ";
                         cin >> file_content;
@@ -639,6 +672,18 @@ class FileManagementTree {
                             traverse = traverse->next;
                         }
                     }
+                    else if (name_or_content ==3) {
+                        string file_path;
+                        cout << endl << "Enter path of file or directory to be searched: ";
+                        cin >> file_path;
+                        TreeNode* temp = FindTreeNodeByPath(root, file_path);
+                        if (temp == nullptr) {
+                            cout << endl << "Invalid path";
+                            break;
+                        }
+                        cout << "Name" << setw(20) << " (type) " << setw(25) << "Path" << endl;
+                        temp->printTreeNode();
+                    }
                     else {
                         cout << endl << "Invalid choice";
                     }
@@ -650,8 +695,27 @@ class FileManagementTree {
                 {
                     /* Copy */
                     string file_name;
-                    cout << endl << "Enter name of file or directory to be copied: ";
-                    cin >> file_name;
+                    int copyChoice = 0;
+                    cout << endl << "1. Copy by name\n2. Copy by path\nEnter choice: ";
+                    cin >> copyChoice;
+                    if (copyChoice == 1) {
+                        cout << endl << "Enter name of file or directory to be copied: ";
+                        cin >> file_name;
+                    }
+                    else if (copyChoice == 2) {
+                        cout << endl << "Enter path of file or directory to be copied: ";
+                        cin >> file_name;
+                        TreeNode* temp = FindTreeNodeByPath(root, file_name);
+                        if (temp == nullptr) {
+                            cout << endl << "Invalid path";
+                            break;
+                        }
+                        file_name = temp->name;
+                    }
+                    else {
+                        cout << endl << "Invalid choice";
+                        break;
+                    }
                     traverse = current->children.getHead();
                     while (traverse != nullptr)
                     {
@@ -670,8 +734,29 @@ class FileManagementTree {
                 {
                     /* Cut */
                     string file_name;
-                    cout << endl << "Enter name of file or directory to be cut: ";
-                    cin >> file_name;
+                    int cutChoice = 0;
+                    cout << endl << "1. Cut by name\n2. Cut by path\nEnter choice: ";
+                    cin >> cutChoice;
+                    if (cutChoice == 1)
+                    {
+                        cout << endl << "Enter name of file or directory to be cut: ";
+                        cin >> file_name;
+                    }
+                    else if (cutChoice == 2)
+                    {
+                        cout << endl << "Enter path of file or directory to be cut: ";
+                        cin >> file_name;
+                        TreeNode* temp = FindTreeNodeByPath(root, file_name);
+                        if (temp == nullptr) {
+                            cout << endl << "Invalid path";
+                            break;
+                        }
+                        file_name = temp->name;
+                    }
+                    else {
+                        cout << endl << "Invalid choice";
+                        break;
+                    }
                     traverse = current->children.getHead();
                     while (traverse != nullptr)
                     {
@@ -703,8 +788,19 @@ class FileManagementTree {
                 case 12:
                 {
                     /* Exporting file structure */
-                    std::filesystem::path currentPath = std::filesystem::current_path();
-                    exportStructure(root, currentPath);
+                    string txt_file_name;
+                    cout << endl << "Enter the name of file to which file structure is to be exported: ";
+                    cin >> txt_file_name;
+                    txt_file_name += ".txt";
+                    fstream outFile(txt_file_name, ios::out);
+                    
+                    if (!outFile.is_open()) {
+                        cout << endl << "File not found" << endl;
+                        break;
+                    }
+
+                    exportStructure(root, outFile);
+
                     break;
                 }
 
