@@ -128,8 +128,40 @@ struct TreeNode
     // Constructor for creating a new node
     TreeNode(string n, string p, string t) : name(n), path(p), type(t) {}
 
+    // get child node by name
+    TreeNode *getChild(string name)
+    {
+        listNode<TreeNode *> *current = children.getHead();
+        while (current != nullptr)
+        {
+            if (current->data->name == name)
+            {
+                return current->data;
+            }
+            current = current->next;
+        }
+        return nullptr;
+    }
+
+    TreeNode* getChild(TreeNode* node) {
+        listNode<TreeNode *> *current = children.getHead();
+        while (current != nullptr)
+        {
+            if (current->data == node)
+            {
+                return current->data;
+            }
+            current = current->next;
+        }
+        return nullptr;
+    }
+
+    void addChild(TreeNode* node) {
+        children.push_back(node);
+    }
+
     void printTreeNode() {
-        cout << name << setw(24) << " (" << type << ") " << setw(24) << path << endl;
+        cout << name << setw(40) << " (" << type << ") " << setw(70) << path << endl;
     }
 };
 
@@ -138,6 +170,36 @@ class FileManagementTree {
     TreeNode *root;
     Stack<TreeNode *> *stack = new Stack<TreeNode *>();
 
+    // void anotherOne(string path) {
+    //     cout << endl;
+    //     int starting_Index = 0;
+    //     bool is_directory = true;
+    //     for (int i = 0; i < path.length(); i++)
+    //     {
+    //         if (path[i] == '/' || i == path.length() - 1)
+    //         {
+    //             string name;
+    //             int limit = i;
+    //             if (i == path.length() - 1)
+    //             {
+    //                 limit++;
+    //             }
+    //             for (int j = starting_Index; j < limit; j++)
+    //             {
+    //                 if (path[j] == '.')
+    //                 {
+    //                     is_directory = false;
+    //                 }
+    //                 name += path[j];
+    //             }
+    //             starting_Index = i + 1;
+
+    //             is_directory = true;
+    //         }
+    //     }
+    //     cout << endl;
+    // }
+
     void choiceValidationOneToTen(int &num) {
         if (num < 1 || num > 14) {
             cout << endl << "Invalid operation. Please select between 1 to 10: ";
@@ -145,40 +207,274 @@ class FileManagementTree {
         }
     }
 
-    TreeNode* InsertInFileStructure(string name, string type) {
-        if (this->root == nullptr) {
-            return new TreeNode(name, name, type);
+    TreeNode *InsertInFileStructure(string name, string path, string type) {
+        if (root == nullptr) {
+            root = new TreeNode(name, path, type);
+            return root;
         }
-        else {
+        TreeNode *current = root;
+        listNode<TreeNode *> *traverse = current->children.getHead();
+        while (traverse != nullptr)
+        {
+            if (name == traverse->data->name)
+            {
+                return nullptr;
+            }
+            traverse = traverse->next;
+        }
+        TreeNode *newNode = new TreeNode(name, path, type);
+        current->children.push_back(newNode);
+        return newNode;
+    }
+
+  void createFileOrDirectory(TreeNode *root, const std::string &path)
+    {
+        std::string name;
+        std::string type;
+
+        // Extract the name and type from the path
+        size_t lastSlashIndex = path.find_last_of('/');
+        if (lastSlashIndex != std::string::npos)
+        {
+            name = path.substr(lastSlashIndex + 1);
+        }
+        else
+        {
+            name = path;
+        }
+
+        if (std::filesystem::is_directory(path))
+        {
+            type = "directory";
+        }
+        else
+        {
+            type = "file";
+        }
+
+        // Traverse the file structure tree to find the parent directory
+        TreeNode *current = root;
+        std::string parentPath = path.substr(0, lastSlashIndex);
+        std::istringstream iss(parentPath);
+        std::string directory;
+
+        while (std::getline(iss, directory, '/'))
+        {
+            TreeNode *child = current->getChild(directory);
+            if (child == nullptr)
+            {
+                child = new TreeNode(directory, "", "directory");
+                current->addChild(child);
+            }
+            current = child;
+        }
+
+        // Create the file or directory
+        if (type == "directory")
+        {
+            TreeNode *newDirectory = new TreeNode(name, path, type);
+            current->addChild(newDirectory);
+            std::cout << "Directory created successfully" << std::endl;
+        }
+        else
+        {
+            TreeNode *newFile = new TreeNode(name, path, type);
+            current->addChild(newFile);
+            std::cout << "File created successfully" << std::endl;
         }
     }
 
-    void breakPathComponents(string path) {
-        cout << endl;
+    TreeNode* function1(TreeNode* root, string path) {
+        if (root == nullptr) {
+            root = new TreeNode("root", "root", "directory");
+        }
+        std::string name;
+        std::string type;
+
+        // Extract the name and type from the path
+        size_t lastSlashIndex = path.find_last_of('/');
+        if (lastSlashIndex != std::string::npos)
+        {
+            name = path.substr(lastSlashIndex + 1);
+        }
+        else
+        {
+            name = path;
+        }
+
+        if (std::filesystem::is_directory(path))
+        {
+            type = "directory";
+        }
+        else
+        {
+            type = "file";
+        }
+
+        // Traverse the file structure tree to find the parent directory
+        TreeNode *current = root;
+        std::string parentPath = path.substr(0, lastSlashIndex);
+        std::istringstream iss(parentPath);
+        std::string directory;
+
+        while (std::getline(iss, directory, '/'))
+        {
+            TreeNode *child = current->getChild(directory);
+            if (child == nullptr)
+            {
+                child = new TreeNode(directory, "", "directory");
+                current->addChild(child);
+            }
+            current = child;
+        }
+
+        // Create the file or directory
+        if (type == "directory")
+        {
+            TreeNode *newDirectory = new TreeNode(name, path, type);
+            current->addChild(newDirectory);
+            std::cout << "Directory created successfully" << std::endl;
+        }
+        else
+        {
+            TreeNode *newFile = new TreeNode(name, path, type);
+            current->addChild(newFile);
+            std::cout << "File created successfully" << std::endl;
+        }
+        return root;
+    }
+
+    void function2(TreeNode* root, string path) {
+
         int starting_Index = 0;
         bool is_directory = true;
-        for (int i = 0; i < path.length(); i++) {
-            if (path[i] == '/' || i == path.length() - 1) {
-                string name;
+        string name;
+        for (int i = 0; i < path.length(); i++)
+        {
+            if (path[i] == '/' || i == path.length() - 1)
+            {
                 int limit = i;
-                if (i == path.length() - 1) {
+                if (i == path.length() - 1)
+                {
                     limit++;
                 }
-                for (int j = starting_Index; j < limit; j++) {
-                    if (path[j] == '.') {
+                for (int j = starting_Index; j < limit; j++)
+                {
+                    if (path[j] == '.')
+                    {
                         is_directory = false;
                     }
                     name += path[j];
                 }
                 starting_Index = i + 1;
-                if (is_directory)
-                {
-                    cout << endl << "Directory: " << name;
-                }
-                else {
-                    cout << endl << "File: " << name;
-                }
+                is_directory = true;
+            }
+        }
 
+        if (root == nullptr) {
+            if (is_directory) {
+                root = new TreeNode(name, path, "directory");
+            }
+            else {
+                cout << endl << "Invalid path";
+                return;
+            }
+        }
+    }
+
+    TreeNode* FindTreeNode(TreeNode* root, string name) {
+        if (root == nullptr) {
+            return nullptr;
+        }
+        if (root->name == name) {
+            return root;
+        }
+        TreeNode* temp = nullptr;
+        listNode<TreeNode *> *traverse = root->children.getHead();
+        while (traverse != nullptr)
+        {
+            temp = FindTreeNode(traverse->data, name);
+            if (temp != nullptr) {
+                return temp;
+            }
+            traverse = traverse->next;
+        }
+        return nullptr;
+    }
+
+    void CreateNewTreeNode(string name, string ParentName /*, string path*/, string type)
+    {
+        if (root == nullptr) {
+            if (type == "directory" && ParentName == "") {
+                root = new TreeNode(name, name, type);
+            }
+            else {
+                cout << endl << "Invalid path";
+                return;
+            }
+        }
+
+        if (ParentName == "") {
+            if (name == root->name) {
+                /* do nothing */
+                return;
+            }
+            else {
+                cout << endl << "Root already full";
+                return;
+            }
+        }
+
+        TreeNode* parent = FindTreeNode(root, ParentName);
+        if (parent == nullptr) {
+            cout << endl << "Invalid path";
+            return;
+        }
+
+        // Traverse through parent children to see if name already exists. If it does exist, return
+        listNode<TreeNode *> *traverse = parent->children.getHead();
+        while (traverse != nullptr)
+        {
+            if (name == traverse->data->name)
+            {
+                return;
+            }
+            traverse = traverse->next;
+        }
+
+        parent->children.push_back(new TreeNode(name, parent->path + "/" + name, type));
+    }
+
+    void breakPathComponents(string path) {
+        int starting_Index = 0;
+        bool is_directory = true;
+        string name, ParentName = "";
+        for (int i = 0; i < path.length(); i++)
+        {
+            if (path[i] == '/' || i == path.length() - 1)
+            {
+                name = "";
+                int limit = i;
+                if (i == path.length() - 1)
+                {
+                    limit++;
+                }
+                for (int j = starting_Index; j < limit; j++)
+                {
+                    if (path[j] == '.')
+                    {
+                        is_directory = false;
+                    }
+                    name += path[j];
+                }
+                starting_Index = i + 1;
+
+                if (is_directory)
+                    CreateNewTreeNode(name, ParentName, "directory");
+                else
+                    CreateNewTreeNode(name, ParentName, "file");
+
+                ParentName = name;
                 is_directory = true;
             }
         }
@@ -358,31 +654,43 @@ class FileManagementTree {
                 case 5: 
                 {
                     /* Merge directories */
-                    cout << endl << "Enter the name of directory to be merged: ";
-                    string directory_name;
-                    cin >> directory_name;
-                    traverse = current->children.getHead();
+                    string inMerge, toMerge;
+                    cout << endl << "Enter the name of directory in which you want to merge: ";
+                    cin >> inMerge;
+                    cout << endl << "Enter the name of directory which you want to merge: ";
+                    cin >> toMerge;
+
+                    TreeNode* inMergeNode = nullptr;
+                    TreeNode* toMergeNode = nullptr;
+
+                    listNode<TreeNode *> *traverse = current->children.getHead();
                     while (traverse != nullptr)
                     {
-                        if (directory_name == traverse->data->name && traverse->data->type == "directory")
+                        if (inMerge == traverse->data->name && traverse->data->type == "directory")
                         {
-                            TreeNode *temp = traverse->data;
-                            listNode<TreeNode *> *traverse2 = temp->children.getHead();
-                            while (traverse2 != nullptr)
-                            {
-                                current->children.push_back(traverse2->data);
-                                traverse2 = traverse2->next;
-                            }
-                            delete traverse->data;
-                            current->children.getTail()->next = nullptr;
-                            cout << endl << "Directory merged successfully";
+                            inMergeNode = traverse->data;
                         }
-                        if (traverse->data->type != "directory")
+                        if (toMerge == traverse->data->name && traverse->data->type == "directory")
                         {
-                            cout << endl << "File cannot be merged";
+                            toMergeNode = traverse->data;
                         }
                         traverse = traverse->next;
                     }
+
+                    if (inMergeNode == nullptr || toMergeNode == nullptr) {
+                        cout << endl << "Invalid directory name";
+                        break;
+                    }
+
+                    listNode<TreeNode *> *traverse2 = toMergeNode->children.getHead();
+                    while (traverse2 != nullptr)
+                    {
+                        inMergeNode->children.push_back(traverse2->data);
+                        traverse2 = traverse2->next;
+                    }
+
+                    current->children.remove(toMergeNode);
+                    cout << endl << "Directories merged successfully";
                     break;
                 }
 
@@ -561,6 +869,20 @@ class FileManagementTree {
                         getline(file, path);
                         breakPathComponents(path);
                     }
+                    
+                    // if (!file.is_open()) {
+                    //     cout << endl << "File not found" << endl;
+                    //     break;
+                    // }
+
+                    // string path = "";
+                    // deleteTree(root);
+                    // root = nullptr;
+                    // while (!file.eof()) {
+                    //     getline(file, path);
+                    //     breakPathComponents(path);
+                    // }
+                    CreateFileAndDirectories(root);
                     exit(0);
                     break;
                 }
