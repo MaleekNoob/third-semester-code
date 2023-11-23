@@ -238,6 +238,29 @@ private:
         }
     }
 
+    bool isEmpty(TreeNode* root) {
+        // check whether root have any children or not
+        if (root->children.getHead() == nullptr)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    bool isDublicate(TreeNode* root, string newdir) {
+        // check whether root children have any directory or file named newdir
+        listNode<TreeNode *> *traverse = root->children.getHead();
+        while (traverse != nullptr)
+        {
+            if (newdir == traverse->data->name)
+            {
+                return true;
+            }
+            traverse = traverse->next;
+        }
+        return false;
+    }
+
     void CreateFileAndDirectories(TreeNode *current)
     {
         int choice = 0;
@@ -328,13 +351,16 @@ private:
 
                 if (directoryChoice == 1)
                 {
-                    cout << endl
-                         << "Enter directory name: ";
+                    cout << endl << "Enter directory name: ";
                     string directory_name;
                     cin >> directory_name;
+                    if (isDublicate(current, directory_name))
+                    {
+                        cout << endl << "Directory already exists";
+                        break;
+                    }
                     createDirectory(current, directory_name);
-                    cout << endl
-                         << "New directory created successfully";
+                    cout << endl << "New directory created successfully";
                 }
                 else
                 {
@@ -357,6 +383,11 @@ private:
                 cout << endl
                      << "Enter file type: ";
                 cin >> file_type;
+                if (isDublicate(current, file_name))
+                {
+                    cout << endl << "File already exists";
+                    break;
+                }
                 createFile(current, file_name, file_type);
                 cout << endl
                      << "New file created successfully";
@@ -416,6 +447,13 @@ private:
                     toMerge = temp->name;
                 }
 
+                if (toMerge == inMerge)
+                {
+                    cout << endl
+                         << "Cannot merge same directories";
+                    break;
+                }
+
                 TreeNode *inMergeNode = nullptr;
                 TreeNode *toMergeNode = nullptr;
 
@@ -467,6 +505,15 @@ private:
                     cout << endl
                          << "Enter name of file or directory to be deleted: ";
                     cin >> file_name;
+
+                    // Only delete empty directories
+                    if (!isEmpty(current))
+                    {
+                        cout << endl
+                             << "Directory is not empty";
+                        break;
+                    }
+
                     traverse = current->children.getHead();
                     while (traverse != nullptr)
                     {

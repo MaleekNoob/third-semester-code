@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <queue>
 using namespace std;
 
 struct AVLTreeNode {
@@ -24,30 +23,6 @@ class AVL {
         }
 
         return getHeight(root->left) - getHeight(root->right);
-    }
-
-    void levelOrder(AVLTreeNode* root) {
-        if (root == nullptr) {
-            return;
-        }
-
-        queue<AVLTreeNode*> q;
-        q.push(root);
-
-        while (!q.empty()) {
-            AVLTreeNode* curr = q.front();
-            q.pop();
-
-            cout << curr->data << " ";
-
-            if (curr->left != nullptr) {
-                q.push(curr->left);
-            }
-
-            if (curr->right != nullptr) {
-                q.push(curr->right);
-            }
-        }
     }
 
     AVLTreeNode* balance (AVLTreeNode* root) {
