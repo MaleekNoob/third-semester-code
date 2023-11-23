@@ -158,19 +158,11 @@ private:
 
         if (findPrefix(root->value, prefix)) {
             cout << endl << "Fruit: " << root->value << endl << "Count: " << root->count << endl;
-            return;
+            // return;
         }
 
-        if (prefix < root->value) {
-            autocompletePrefix(root->left, prefix);
-        }
-        else if (prefix > root->value) {
-            autocompletePrefix(root->right, prefix);
-        }
-        else {
-            autocompletePrefix(root->left, prefix);
-            autocompletePrefix(root->right, prefix);
-        }
+        autocompletePrefix(root->left, prefix);
+        autocompletePrefix(root->right, prefix);
     
     }
     
@@ -222,6 +214,18 @@ private:
     
     }
 
+    void deleteTreeNodes(TreeNode *root)
+    {
+        if (root == nullptr)
+        {
+            return;
+        }
+
+        deleteTreeNodes(root->left);
+        deleteTreeNodes(root->right);
+        delete root;
+    }
+
 public:
     AVL() : root(nullptr) {}
 
@@ -238,6 +242,10 @@ public:
     void remove(string data)
     {
         root = removeData(root, data);
+    }
+
+    void deleteTree() {
+        deleteTreeNodes(root);
     }
 
     void displayMenu() {

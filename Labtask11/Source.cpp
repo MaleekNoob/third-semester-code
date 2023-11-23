@@ -11,6 +11,7 @@ int main() {
         switch (choice) {
         case 1:
         {
+
             cout << endl << "Reading file";
             fstream file("dictionary.txt");
 
@@ -18,6 +19,9 @@ int main() {
                 cout << endl << "File not found";
                 break;
             }
+
+            // delete tree
+            tree.deleteTree();
 
             string word;
             while (file >> word) {
