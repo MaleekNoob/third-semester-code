@@ -22,6 +22,7 @@ int main() {
 
             // delete tree
             tree.deleteTree();
+            tree.empty();
 
             string word;
             while (file >> word) {

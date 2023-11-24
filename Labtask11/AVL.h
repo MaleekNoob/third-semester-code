@@ -248,6 +248,10 @@ public:
         deleteTreeNodes(root);
     }
 
+    void empty() {
+        root = nullptr;
+    }
+
     void displayMenu() {
         cout << endl << "1. Read file and store data";
         cout << endl << "2. Auto complete data";
