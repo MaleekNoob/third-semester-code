@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class Node {
@@ -55,6 +56,44 @@ class BinarySearchTree {
         }
     }
 
+    Node* deleteNode(Node* root, int data) {
+        if (root == NULL) {
+            return NULL;
+        }
+
+        if (data < root->data) {
+            root->left = deleteNode(root->left, data);
+        } else if (data > root->data) {
+            root->right = deleteNode(root->right, data);
+        } else {
+            if (root->left == NULL && root->right == NULL) {
+                delete root;
+                return NULL;
+            } else if (root->left == NULL) {
+                Node* temp = root->right;
+                delete root;
+                return temp;
+            } else if (root->right == NULL) {
+                Node* temp = root->left;
+                delete root;
+                return temp;
+            } else {
+                Node* minNode = root->right;
+                while (minNode->left != NULL) {
+                    minNode = minNode->left;
+                }
+                root->data = minNode->data;
+                root->right = deleteNode(root->right, minNode->data);
+            }
+        }
+
+        return root;
+    }
+
+    void deleteData(int data) {
+        root = deleteNode(root, data);
+    }
+
     void InOrder(Node* root) {
         if (root == NULL) {
             return;
@@ -67,6 +106,31 @@ class BinarySearchTree {
 
     void inOrder() {
         InOrder(root);
+    }
+
+    void levelOrderDisplay() {
+        if (root == NULL) {
+            return;
+        }
+
+        queue<Node*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            Node* currentNode = q.front();
+            q.pop();
+
+            cout << currentNode->data << " ";
+
+            if (currentNode->left != NULL) {
+                q.push(currentNode->left);
+            }
+
+            if (currentNode->right != NULL) {
+                q.push(currentNode->right);
+            }
+        }
+    
     }
 };
 

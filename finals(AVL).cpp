@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class TreeNode {
@@ -125,6 +126,42 @@ class AVL {
         root = insertData(root, val);
     }
 
+    void levelOrderDisplay() {
+        if (root == nullptr) {
+            return;
+        }
+
+        queue<TreeNode*> q;
+        q.push(root);
+        q.push(nullptr);
+
+        while (!q.empty()) {
+
+            TreeNode* currentNode = q.front();
+            q.pop();
+
+            if (currentNode == nullptr) {
+                cout << endl;
+
+                if (!q.empty()) {
+                    q.push(nullptr);
+                }
+
+                continue;
+            }
+
+            cout << currentNode->data << " ";
+
+            if (currentNode->left != nullptr) {
+                q.push(currentNode->left);
+            }
+
+            if (currentNode->right != nullptr) {
+                q.push(currentNode->right);
+            }
+        }
+    }
+
     void display() {
         displayTreeData(root);
     }
@@ -141,8 +178,23 @@ int main() {
     tree.insert(40);
     tree.insert(50);
     tree.insert(25);
+    tree.insert(5);
+    tree.insert(1);
+    tree.insert(2);
+    tree.insert(3);
+    tree.insert(4);
+    tree.insert(6);
+    tree.insert(7);
+    tree.insert(8);
+    tree.insert(9);
+    tree.insert(11);
+    tree.insert(22);
+    tree.insert(37);
+    tree.insert(45);
+    tree.insert(55);
+    tree.insert(165);
 
-    tree.display();
+    tree.levelOrderDisplay();
 
     return 0;
 }

@@ -3,59 +3,60 @@
 #include <stack>
 using namespace std;
 
-bool IsOperation(char ch) {
-    return ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^';
+int prec(char op) {
+    if (op == '^') {
+        return 3;
+    }
+    else if (op == '*' || op == '/') {
+        return 2;
+    }
+    else if (op == '+' || op == '-') {
+        return 1;
+    }
+    else {
+        return -1;
+    }
 }
 
-bool prcd(char op1, char op2) {
-}
+string infixToPostfix(string s) {
+    stack<char> st;
+    string res;
 
-string InfixToPostfix(string str) {
-    string output = "";
-    stack<char> opstk;
-    for (int i = 0; i < str.length(); i++) {
-        if (str[i] != ' ') {
-            if (IsOperation(str[i])) {
-                if (prcd(opstk.top(), str[i]))
-                    opstk.push(str[i]);
-                else
-                {
-                    char c = opstk.top();
-                    opstk.pop();
-                    output += c;
-                }
+    for (int i = 0; i < s.length(); i++) {
+        if (s[i] >= 'a' && s[i] <= 'z' || s[i] >= 'A' && s[i] <= 'Z') { // if operand
+            res += s[i];
+        }
+        else if (s[i] == '(') { // if opening bracket
+            st.push(s[i]);
+        }
+        else if (s[i] == ')') { // if closing bracket
+            while (!st.empty() && st.top() != '(') {
+                res += st.top();
+                st.pop();
             }
-            else if (str[i] == '(') {
-                opstk.push(str[i]);
+            if (!st.empty()) {
+                st.pop();
             }
-            else if (str[i] == ')') {
-                while (opstk.top() != '(') {
-                    char c = opstk.top();
-                    opstk.pop();
-                    output += c;
-                }
-                opstk.pop();
+        }
+        else { // if operator
+            while (!st.empty() && prec(st.top()) > prec(s[i])) {
+                res += st.top();
+                st.pop();
             }
-            else
-                output += str[i];
+            st.push(s[i]);
         }
     }
 
-    while(!opstk.empty()) {
-        char c = opstk.top();
-        opstk.pop();
-        output += c;
+    while (!st.empty()) {
+        res += st.top();
+        st.pop();
     }
 
-    return output;
-
+    return res;
 }
 
 int main() {
-    string str;
-
-    cout << "Enter expression: ";
-    getline(cin, str);
-
-    cout << "Postfix expression: " << InfixToPostfix(str) << endl;
+    string s = "(a-b/c)*(a/k-l)";
+    cout << infixToPostfix(s) << endl;
+    return 0;
 }
