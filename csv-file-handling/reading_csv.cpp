@@ -4,6 +4,14 @@
 // #include <cstring>
 using namespace std;
 
+int strlen(string str) {
+    int i = 0;
+    while (str[i] != '\0') {
+        i++;
+    }
+    return i;
+}
+
 void displayFileData(fstream& file) {
     while (!file.eof()) {
         string line = "";
@@ -51,6 +59,9 @@ void StoreDataInArray(fstream& file) {
 
 
     for (int i = 0; i < 300; i++) {
+        if (i == 299) {
+            return;
+        }
         int j = 0;
         while (arr[i][j] != ' ') {
             claim_status[i] += arr[i][j];
@@ -113,7 +124,7 @@ void StoreDataInArray(fstream& file) {
             j++;
         }
         j++;
-        while (arr[i][j] != ' ') {
+        while (arr[i][j] != ' ' ) {
             video_comment_count[i] += arr[i][j];
             j++;
         }
@@ -164,7 +175,7 @@ int main() {
         exit(1);
     }
     displayFileData(file);
-    StoreDataInArray(file);
+    // StoreDataInArray(file);
     file.close();
 
     return 0;
